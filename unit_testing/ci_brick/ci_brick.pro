@@ -16,10 +16,9 @@ TEMPLATE = app
 
 
 SOURCES += tst_ci_bricktest.cpp
-DEFINES += SRCDIR=\\\"$$PWD/\\\"
 
 
-unix:!macx: LIBS += -L$$PWD/../../build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release/ -lcontexting_core
+unix:!macx: LIBS += -L../../build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release/ -lcontexting_core
 
-INCLUDEPATH += $$PWD/../../contexting_core
-DEPENDPATH += $$PWD/../../contexting_core
+INCLUDEPATH += ../../contexting_core
+DEPENDPATH += ../../contexting_core
