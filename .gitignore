@@ -2,3 +2,8 @@
 *.so
 *.so.*
 Dockerfile~
+.gitignore~
+
+build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release/
+unit_testing/build-ci-Desktop_Qt_5_5_1_GCC_64bit-Release/
+
