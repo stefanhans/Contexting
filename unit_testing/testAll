@@ -1,9 +1,9 @@
 echo ""
-test_ci_brick
+./test_ci_brick
 echo ""
 
 echo ""
-test_ci
+./test_ci
 echo ""
 
 

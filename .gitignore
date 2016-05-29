@@ -6,6 +6,12 @@ Dockerfile~
 
 *.pro.user
 
+test_ci
+test_ci_brick
+
+ci.pro
+ci_brick.pro
+
 build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release/
 build-ci-Desktop_Qt_5_5_1_GCC_64bit-Release/
 build-ci_brick-Desktop_Qt_5_5_1_GCC_64bit-Release/
