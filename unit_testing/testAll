@@ -1,0 +1,9 @@
+echo ""
+test_ci_brick
+echo ""
+
+echo ""
+test_ci
+echo ""
+
+

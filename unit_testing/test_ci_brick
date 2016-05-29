@@ -1,0 +1,4 @@
+LD_LIBRARY_PATH="../build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release:$LD_LIBRARY_PATH"
+
+build-ci_brick-Desktop_Qt_5_5_1_GCC_64bit-Release/tst_ci_bricktest
+
