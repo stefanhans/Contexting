@@ -13,6 +13,8 @@ ADD unit_testing/ci_brick/* /home/Contexting/unit_testing/ci_brick/
 RUN find /home/Contexting/unit_testing
 
 RUN cd /home/Contexting/contexting_core && qmake && make
-RUN cd /home/Contexting/unit_testing && qmake && make && ./testAll
+RUN cd /home/Contexting/unit_testing/ci && qmake && make
+RUN cd /home/Contexting/unit_testing/ci_brick && qmake && make
+RUN cd /home/Contexting/unit_testing && ./testAll
 
 CMD ["/bin/bash"]
