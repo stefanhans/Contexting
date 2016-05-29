@@ -1,13 +1,10 @@
-FROM tefworkshop/qt5-console:8
+FROM stefanhans/contexting
 MAINTAINER Stefan Hans <stefan.hans@telefonica.com> 
-
-RUN mkdir /home/Contexting \
-	&& mkdir /home/Contexting/contexting_core \
-	&& mkdir /home/Contexting/unit_testing
 
 ADD contexting_core/* /home/Contexting/contexting_core/
 ADD unit_testing/* /home/Contexting/unit_testing/
 
-#RUN cd /home/HelloWorld && qmake -project && qmake && make && ./HelloWorld
+RUN cd /home/Contexting/contexting_core && qmake && make
+RUN cd /home/Contexting/unit_testing && qmake && make && ./testAll
 
 CMD ["/bin/bash"]

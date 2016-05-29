@@ -1,4 +1,6 @@
-LD_LIBRARY_PATH="../build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release:$LD_LIBRARY_PATH"
+echo $LD_LIBRARY_PATH
+
+LD_LIBRARY_PATH="../build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release"
 
 build-ci-Desktop_Qt_5_5_1_GCC_64bit-Release/tst_citest
 
