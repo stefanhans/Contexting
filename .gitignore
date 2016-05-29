@@ -4,6 +4,9 @@
 Dockerfile~
 .gitignore~
 
+*.pro.user
+
 build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release/
-unit_testing/build-ci-Desktop_Qt_5_5_1_GCC_64bit-Release/
+build-ci-Desktop_Qt_5_5_1_GCC_64bit-Release/
+build-ci_brick-Desktop_Qt_5_5_1_GCC_64bit-Release/
 
