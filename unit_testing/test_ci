@@ -1,0 +1,3 @@
+export LD_LIBRARY_PATH="/home/stefan/Development/Contexting/build-contexting_core-Desktop_Qt_5_5_1_GCC_64bit-Release"
+
+${CONTEXTING_HOME}/unit_testing/build-ci-Desktop_Qt_5_5_1_GCC_64bit-Release/tst_citest

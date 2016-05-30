@@ -1,6 +1,8 @@
 FROM stefanhans/contexting
 MAINTAINER Stefan Hans <stefan.hans@telefonica.com> 
 
+ENV CONTEXTING_HOME /home/Contexting
+
 ADD contexting_core/* /home/Contexting/contexting_core/
 ADD unit_testing/test* /home/Contexting/unit_testing/
 ADD unit_testing/ci/* /home/Contexting/unit_testing/ci/
