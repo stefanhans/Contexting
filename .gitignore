@@ -1,8 +1,7 @@
 *.o
 *.so
 *.so.*
-Dockerfile~
-.gitignore~
+*~
 
 *.pro.user
 *.pro
