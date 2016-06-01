@@ -17,9 +17,6 @@ public:
 
     quint8 getCiType() const;
     void setCiType(const quint8 &value);
-    QString ciTypeToString(quint8 byte) const;
-    QString ciTypeToString() const;
-
 
     /*
      * CI ROOT CIC
@@ -30,8 +27,6 @@ public:
     void setRootCicMask(const quint8 &value);
     quint8 getRootCicContent() const;
     quint8 getRootCicMask() const;
-    QString rootCicToString(quint8 byte) const;
-    QString rootCicToString() const;
 
 
     /*
