@@ -35,18 +35,26 @@ public:
     quint8 getCiSize() const;
     void setCiSize(const quint8 &value);
 
+    /*
+     * Resize CI_Bricks according to ciSize
+     */
+    void resizeCiBricks();
+
 
     /*
      * CI CIC BRICKS
      */
-    QVector<CI_Brick> getCI_Bricks() const;
-    CI_Brick getCI_Bricks(quint8 index) const;
-    void setCI_Bricks(const QVector<CI_Brick> &value);
-    void setCI_Bricks(const QByteArray &value);
-    void setCI_Brick(const CI_Brick &value, quint8 index);
-    void setCI_BrickContent(const quint8 &value, quint8 index);
-    void setCI_BrickMask(const quint8 &value, quint8 index);
-    void truncateCI_Bricks(quint8 size);
+    const QVector<CI_Brick> getCiBricks() const;
+    CI_Brick getCiBricks(quint8 index) const;
+    void setCiBricks(const QVector<CI_Brick> &value);
+    void setCiBricks(const QVector<CI_Brick> &value, quint8 index);
+    void setCiBrick(const CI_Brick &value, quint8 index);
+
+    quint8 getCiBrickContent(quint8 index);
+    void setCiBrickContent(const quint8 &value, quint8 index);
+
+    quint8 getCiBrickMask(quint8 index);
+    void setCiBrickMask(const quint8 &value, quint8 index);
 
 private:
 
