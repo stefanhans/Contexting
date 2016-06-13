@@ -199,21 +199,21 @@ void CiTest::testCiBricks()
 
 
 
-QVERIFY2(false, "const QVector<CI_Brick> getCiBricks() const");
-QVERIFY2(false, "setCiBricks(const QVector<CI_Brick> &value)");
-QVERIFY2(false, "setCiBricks(const QVector<CI_Brick> &value, quint8 index)");
+    QVERIFY2(false, "const QVector<CI_Brick> getCiBricks() const");
+    QVERIFY2(false, "setCiBricks(const QVector<CI_Brick> &value)");
+    QVERIFY2(false, "setCiBricks(const QVector<CI_Brick> &value, quint8 index)");
 
     QVERIFY2(false, "appendCiBricks(const QVector<CI_Brick> &value)");
 
 
-//    CI_Brick getCiBrick(quint8 index) const;
-//    void setCiBrick(const CI_Brick &value, quint8 index);
+    QVERIFY2(false, "CI_Brick getCiBrick(quint8 index) const;");
+    QVERIFY2(false, "void setCiBrick(const CI_Brick &value, quint8 index);");
 
-//    quint8 getCiBrickContent(quint8 index);
-//    void setCiBrickContent(const quint8 &value, quint8 index);
+    QVERIFY2(false, "quint8 getCiBrickContent(quint8 index);");
+    QVERIFY2(false, "void setCiBrickContent(const quint8 &value, quint8 index);");
 
-//    quint8 getCiBrickMask(quint8 index);
-//    void setCiBrickMask(const quint8 &value, quint8 index);
+    QVERIFY2(false, "quint8 getCiBrickMask(quint8 index);");
+    QVERIFY2(false, "void setCiBrickMask(const quint8 &value, quint8 index);");
 
 
 
