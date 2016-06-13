@@ -61,7 +61,7 @@ const QVector<CI_Brick> CI::getCiBricks() const
     return CI_Bricks;
 }
 
-CI_Brick CI::getCiBricks(quint8 index) const
+CI_Brick CI::getCiBrick(quint8 index) const
 {
     return (CI_Brick) CI_Bricks.at(index);
 }
@@ -74,22 +74,14 @@ void CI::setCiBricks(const QVector<CI_Brick> &value)
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
-    for (int i=index, j=0; i<index+value.size(); i++, j++) {
-
-        if(i < CI_Bricks.size()) {
-            CI_Bricks.replace(i, value.at(j));
-            qDebug() << QString("CI_Bricks.replace(%1, value.at(%2)): %3").arg(i).arg(j).arg(value.at(j).getContent());
-            qDebug() << QString("CI_Bricks.replace(%1, value.at(%2)): %3").arg(i).arg(j).arg(value.at(j).getMask());
-            return;
-        }
-
-        if(i > 255) {
-            return;
-        }
-
-        CI_Bricks.append(value.at(j));
-        qDebug() << "append: ";
+    for(int i=0; i<value.size(); i++) {
+        CI_Bricks.insert(index++, value.at(i));
     }
+}
+
+void CI::appendCiBricks(const QVector<CI_Brick> &value) {
+
+    setCiBricks(value, CI_Bricks.size());
 }
 
 void CI::setCiBrick(const CI_Brick &value, quint8 index)

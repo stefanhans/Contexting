@@ -106,9 +106,9 @@ void CiTest::testGetterSetter()
         QVERIFY2(ci.getCiBricks().at(i).getMask() == ci_bricks.at(i).getMask(), "ci.getCI_Bricks().at(i).getMask() == ci_bricks.at(i).getMask()");
 
         // CI_Brick getCI_Bricks(quint8 index)
-        QVERIFY2(ci.getCiBricks(i) == ci_bricks.at(i), "ci.getCI_Bricks(i) == ci_bricks.at(i)");
-        QVERIFY2(ci.getCiBricks(i).getContent() == ci_bricks.at(i).getContent(), "ci.getCI_Bricks(i).getContent() == ci_bricks.at(i).getContent()");
-        QVERIFY2(ci.getCiBricks(i).getMask() == ci_bricks.at(i).getMask(), "ci.getCI_Bricks(i).getMask() == ci_bricks.at(i).getMask()");
+        QVERIFY2(ci.getCiBrick(i) == ci_bricks.at(i), "ci.getCI_Bricks(i) == ci_bricks.at(i)");
+        QVERIFY2(ci.getCiBrick(i).getContent() == ci_bricks.at(i).getContent(), "ci.getCI_Bricks(i).getContent() == ci_bricks.at(i).getContent()");
+        QVERIFY2(ci.getCiBrick(i).getMask() == ci_bricks.at(i).getMask(), "ci.getCI_Bricks(i).getMask() == ci_bricks.at(i).getMask()");
     }
 
     for (int i=1; i<=255; i++) {
@@ -116,7 +116,7 @@ void CiTest::testGetterSetter()
         ci_brick_2.setMask(i);
         ci.setCiBrick(ci_brick_2, i);
 
-        QVERIFY2(ci.getCiBricks(i) == ci_brick_2, "ci.getCI_Bricks(i) == ci_brick_2");
+        QVERIFY2(ci.getCiBrick(i) == ci_brick_2, "ci.getCI_Bricks(i) == ci_brick_2");
     }
 
     // CI_BrickContent
@@ -192,6 +192,35 @@ void CiTest::testCiBricks()
 
     ci.setCiBricks(ci_bricks);
     qDebug() << "ci.getCiBricks().size(): " << ci.getCiBricks().size();
+
+
+
+
+
+
+
+QVERIFY2(false, "const QVector<CI_Brick> getCiBricks() const");
+QVERIFY2(false, "setCiBricks(const QVector<CI_Brick> &value)");
+QVERIFY2(false, "setCiBricks(const QVector<CI_Brick> &value, quint8 index)");
+
+    QVERIFY2(false, "appendCiBricks(const QVector<CI_Brick> &value)");
+
+
+//    CI_Brick getCiBrick(quint8 index) const;
+//    void setCiBrick(const CI_Brick &value, quint8 index);
+
+//    quint8 getCiBrickContent(quint8 index);
+//    void setCiBrickContent(const quint8 &value, quint8 index);
+
+//    quint8 getCiBrickMask(quint8 index);
+//    void setCiBrickMask(const quint8 &value, quint8 index);
+
+
+
+
+
+
+
 
 
 //    for (int i=0; i<=255; i++) {

@@ -42,12 +42,15 @@ public:
 
 
     /*
-     * CI CIC BRICKS
+     * CI BRICKS
      */
     const QVector<CI_Brick> getCiBricks() const;
-    CI_Brick getCiBricks(quint8 index) const;
     void setCiBricks(const QVector<CI_Brick> &value);
     void setCiBricks(const QVector<CI_Brick> &value, quint8 index);
+
+    void appendCiBricks(const QVector<CI_Brick> &value);
+
+    CI_Brick getCiBrick(quint8 index) const;
     void setCiBrick(const CI_Brick &value, quint8 index);
 
     quint8 getCiBrickContent(quint8 index);
