@@ -1,3 +1,3 @@
-export LD_LIBRARY_PATH="${CONTEXTING_HOME}/build-contexting_core-Desktop_Qt_5_6_0_GCC_64bit-Release"
+export LD_LIBRARY_PATH="${CONTEXTING_HOME}/build-contexting_core-Desktop_Qt_${QT_VERSION_STR}_GCC_64bit-Release"
 
-${CONTEXTING_HOME}/unit_testing/build-ci_brick-Desktop_Qt_5_6_0_GCC_64bit-Release/tst_ci_bricktest
+${CONTEXTING_HOME}/unit_testing/build-ci_brick-Desktop_Qt_${QT_VERSION_STR}_GCC_64bit-Release/tst_ci_bricktest
