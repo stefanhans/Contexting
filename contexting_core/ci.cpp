@@ -54,16 +54,9 @@ void CI::resizeCiBricks()
     CI_Bricks.resize(ciSize);
 }
 
-
-
 const QVector<CI_Brick> CI::getCiBricks() const
 {
     return CI_Bricks;
-}
-
-CI_Brick CI::getCiBrick(quint8 index) const
-{
-    return (CI_Brick) CI_Bricks.at(index);
 }
 
 void CI::setCiBricks(const QVector<CI_Brick> &value)
@@ -71,6 +64,11 @@ void CI::setCiBricks(const QVector<CI_Brick> &value)
     CI_Bricks = value;
 }
 
+
+const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
+{
+    return CI_Bricks.mid(index, length);
+}
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
@@ -84,6 +82,16 @@ void CI::appendCiBricks(const QVector<CI_Brick> &value) {
     setCiBricks(value, CI_Bricks.size());
 }
 
+
+
+
+
+CI_Brick CI::getCiBrick(quint8 index) const
+{
+    return (CI_Brick) CI_Bricks.at(index);
+}
+
+
 void CI::setCiBrick(const CI_Brick &value, quint8 index)
 {
     CI_Bricks.replace(index, value);
@@ -94,9 +102,9 @@ quint8 CI::getCiBrickContent(quint8 index)
     return CI_Bricks[index].getContent();
 }
 
-void CI::setCiBrickContent(const quint8 &value, quint8 index)
+void CI::setCiBrickContent(const quint8 content, quint8 index)
 {
-    CI_Bricks[index].setContent(value);
+    CI_Bricks[index].setContent(content);
 }
 
 quint8 CI::getCiBrickMask(quint8 index)
@@ -104,7 +112,7 @@ quint8 CI::getCiBrickMask(quint8 index)
     return CI_Bricks[index].getMask();
 }
 
-void CI::setCiBrickMask(const quint8 &value, quint8 index)
+void CI::setCiBrickMask(const quint8 mask, quint8 index)
 {
-    CI_Bricks[index].setMask(value);
+    CI_Bricks[index].setMask(mask);
 }

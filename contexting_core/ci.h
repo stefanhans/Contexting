@@ -18,15 +18,18 @@ public:
     quint8 getCiType() const;
     void setCiType(const quint8 &value);
 
+
     /*
      * CI ROOT CIC
      */
     CI_Brick getRootCIC() const;
     void setRootCIC(const CI_Brick &value);
-    void setRootCicContent(const quint8 &value);
-    void setRootCicMask(const quint8 &value);
+
     quint8 getRootCicContent() const;
+    void setRootCicContent(const quint8 &value);
+
     quint8 getRootCicMask() const;
+    void setRootCicMask(const quint8 &value);
 
 
     /*
@@ -34,6 +37,7 @@ public:
      */
     quint8 getCiSize() const;
     void setCiSize(const quint8 &value);
+
 
     /*
      * Resize CI_Bricks according to ciSize
@@ -46,6 +50,8 @@ public:
      */
     const QVector<CI_Brick> getCiBricks() const;
     void setCiBricks(const QVector<CI_Brick> &value);
+
+    const QVector<CI_Brick> getCiBricks(quint8 index, quint8 length) const;
     void setCiBricks(const QVector<CI_Brick> &value, quint8 index);
 
     void appendCiBricks(const QVector<CI_Brick> &value);
@@ -54,10 +60,10 @@ public:
     void setCiBrick(const CI_Brick &value, quint8 index);
 
     quint8 getCiBrickContent(quint8 index);
-    void setCiBrickContent(const quint8 &value, quint8 index);
+    void setCiBrickContent(const quint8 content, quint8 index);
 
     quint8 getCiBrickMask(quint8 index);
-    void setCiBrickMask(const quint8 &value, quint8 index);
+    void setCiBrickMask(const quint8 mask, quint8 index);
 
 private:
 
