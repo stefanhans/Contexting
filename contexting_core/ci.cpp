@@ -49,11 +49,6 @@ void CI::setCiSize(const quint8 &value)
     ciSize = value;
 }
 
-void CI::resizeCiBricks()
-{
-    CI_Bricks.resize(ciSize);
-}
-
 const QVector<CI_Brick> CI::getCiBricks() const
 {
     return CI_Bricks;
@@ -83,6 +78,22 @@ void CI::appendCiBricks(const QVector<CI_Brick> &value) {
 }
 
 
+
+void CI::resizeCiBricks()
+{
+    CI_Bricks.resize(ciSize);
+}
+
+bool CI::ciBricksAreEqual(const QVector<CI_Brick> &value)
+{
+    if ( CI_Bricks.size() != value.size() ) return false;
+
+    for (int i=0; i<CI_Bricks.size(); i++) {
+        if(CI_Bricks.at(i).getContent() != value.at(i).getContent()) return false;
+        if(CI_Bricks.at(i).getMask() != value.at(i).getMask()) return false;
+    }
+    return true;
+}
 
 
 

@@ -50,6 +50,14 @@ public:
 
     void appendCiBricks(const QVector<CI_Brick> &value);
 
+
+    /*
+     * Resize CI_Bricks according to ciSize
+     */
+    void resizeCiBricks();
+
+    bool ciBricksAreEqual(const QVector<CI_Brick> &value);
+
     CI_Brick getCiBrick(quint8 index) const;
     void setCiBrick(const CI_Brick &value, quint8 index);
 
@@ -58,14 +66,6 @@ public:
 
     quint8 getCiBrickMask(quint8 index);
     void setCiBrickMask(const quint8 mask, quint8 index);
-
-
-    /*
-     * Resize CI_Bricks according to ciSize
-     */
-    void resizeCiBricks();
-
-//    bool ciBricksAreEqual(const QVector<CI_Brick> &value);
 
 private:
 

@@ -271,6 +271,20 @@ void CiTest::testCiBricks()
             qDebug() << "----------";
         }
 
+
+
+        ci_bricks.clear();
+
+        for (int j=0; j<10; j++) {
+
+            randContent = randByte();
+            randMask = randByte();
+
+            ci_bricks.append(CI_Brick(randContent, randMask));
+        }
+        ci.setCiBricks(ci_bricks);
+        QVERIFY(ci.ciBricksAreEqual(ci_bricks));
+
 //        for (int i=0; i<l-ci_bricks.size(); i++) {
 
 //            qDebug() << "Length" << l << "Index" << i;
