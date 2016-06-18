@@ -60,17 +60,17 @@ void Ci_brickTest::testCopyAndAssignment()
 void Ci_brickTest::testMaskFunctions()
 {
     ci_brick.setMask(0);
-    QVERIFY2(ci_brick.hasEmptyMask(), "hasEmptyMask() FAILED!");
+    QVERIFY(ci_brick.hasEmptyMask());
 
     ci_brick.setMask(255);
-    QVERIFY2(ci_brick.hasFullMask(), "hasFullMask() FAILED!");
+    QVERIFY(ci_brick.hasFullMask());
 }
 
 void Ci_brickTest::testCompareFunctions()
 {
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
-        QVERIFY2(ci_brick.contentMatch(i), "ci_brick.contentMatch(quint8)");
+        QVERIFY(ci_brick.contentMatch(i));
     }
 
     ci_brick.setContent(0);
@@ -87,7 +87,7 @@ void Ci_brickTest::testCompareFunctions()
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
         ci_brick_2.setContent(i);
-        QVERIFY2(ci_brick.contentMatch(ci_brick_2), "ci_brick.contentMatch(CI_Brick)");
+        QVERIFY(ci_brick.contentMatch(ci_brick_2));
     }
 
     ci_brick.setContent(0);

@@ -51,46 +51,45 @@ void CI::setCiSize(const quint8 &value)
 
 const QVector<CI_Brick> CI::getCiBricks() const
 {
-    return CI_Bricks;
+    return ciBricks;
 }
 
 void CI::setCiBricks(const QVector<CI_Brick> &value)
 {
-    CI_Bricks = value;
+    ciBricks = value;
 }
 
 
 const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
 {
-    return CI_Bricks.mid(index, length);
+    return ciBricks.mid(index, length);
 }
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
     for(int i=0; i<value.size(); i++) {
-        CI_Bricks.insert(index++, value.at(i));
+        ciBricks.insert(index++, value.at(i));
     }
 }
 
 void CI::appendCiBricks(const QVector<CI_Brick> &value) {
 
-    setCiBricks(value, CI_Bricks.size());
+    setCiBricks(value, ciBricks.size());
 }
-
 
 
 void CI::resizeCiBricks()
 {
-    CI_Bricks.resize(ciSize);
+    ciBricks.resize(ciSize);
 }
 
 bool CI::ciBricksAreEqual(const QVector<CI_Brick> &value)
 {
-    if ( CI_Bricks.size() != value.size() ) return false;
+    if ( ciBricks.size() != value.size() ) return false;
 
-    for (int i=0; i<CI_Bricks.size(); i++) {
-        if(CI_Bricks.at(i).getContent() != value.at(i).getContent()) return false;
-        if(CI_Bricks.at(i).getMask() != value.at(i).getMask()) return false;
+    for (int i=0; i<ciBricks.size(); i++) {
+        if(ciBricks.at(i).getContent() != value.at(i).getContent()) return false;
+        if(ciBricks.at(i).getMask() != value.at(i).getMask()) return false;
     }
     return true;
 }
@@ -99,31 +98,31 @@ bool CI::ciBricksAreEqual(const QVector<CI_Brick> &value)
 
 CI_Brick CI::getCiBrick(quint8 index) const
 {
-    return (CI_Brick) CI_Bricks.at(index);
+    return (CI_Brick) ciBricks.at(index);
 }
 
 
 void CI::setCiBrick(const CI_Brick &value, quint8 index)
 {
-    CI_Bricks.replace(index, value);
+    ciBricks.replace(index, value);
 }
 
 quint8 CI::getCiBrickContent(quint8 index)
 {
-    return CI_Bricks[index].getContent();
+    return ciBricks[index].getContent();
 }
 
 void CI::setCiBrickContent(const quint8 content, quint8 index)
 {
-    CI_Bricks[index].setContent(content);
+    ciBricks[index].setContent(content);
 }
 
 quint8 CI::getCiBrickMask(quint8 index)
 {
-    return CI_Bricks[index].getMask();
+    return ciBricks[index].getMask();
 }
 
 void CI::setCiBrickMask(const quint8 mask, quint8 index)
 {
-    CI_Bricks[index].setMask(mask);
+    ciBricks[index].setMask(mask);
 }

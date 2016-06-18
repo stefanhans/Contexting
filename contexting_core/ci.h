@@ -13,14 +13,17 @@ public:
         ciType(0),
         rootCIC(),
         ciSize(0),
-        CI_Bricks(QVector<CI_Brick>(1)) {}
+        ciBricks(QVector<CI_Brick>(1)) {}
 
+    /*
+     * ciType
+     */
     quint8 getCiType() const;
     void setCiType(const quint8 &value);
 
 
     /*
-     * CI ROOT CIC
+     * rootCIC
      */
     CI_Brick getRootCIC() const;
     void setRootCIC(const CI_Brick &value);
@@ -33,18 +36,21 @@ public:
 
 
     /*
-     * CI SIZE
+     * ciSize
      */
     quint8 getCiSize() const;
     void setCiSize(const quint8 &value);
 
 
     /*
-     * CI BRICKS
+     * ciBricks
      */
     const QVector<CI_Brick> getCiBricks() const;
     void setCiBricks(const QVector<CI_Brick> &value);
 
+    /*
+     *
+     */
     const QVector<CI_Brick> getCiBricks(quint8 index, quint8 length) const;
     void setCiBricks(const QVector<CI_Brick> &value, quint8 index);
 
@@ -52,7 +58,7 @@ public:
 
 
     /*
-     * Resize CI_Bricks according to ciSize
+     * Resize ciBricks according to ciSize
      */
     void resizeCiBricks();
 
@@ -72,7 +78,7 @@ private:
     quint8 ciType;
     CI_Brick rootCIC;
     quint8 ciSize;
-    QVector<CI_Brick> CI_Bricks;
+    QVector<CI_Brick> ciBricks;
 };
 
 #endif // CI_H

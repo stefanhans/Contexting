@@ -182,15 +182,17 @@ void CiTest::testCiBricks()
 
         ci.setCiBricks(ci_bricks);
 
-        QVERIFY(ci.getCiBricks().size() == ci_bricks.size());
+        QVERIFY(ci.ciBricksAreEqual(ci_bricks));
 
-        for (int j=0; j<ci_bricks.size(); j++) {
+//        QVERIFY(ci.getCiBricks().size() == ci_bricks.size());
 
-            QVERIFY(&(ci.getCiBricks().at(j)) == &(ci_bricks.at(j)));
+//        for (int j=0; j<ci_bricks.size(); j++) {
 
-            QVERIFY(ci.getCiBricks().at(j).getContent() == ci_bricks.at(j).getContent());
-            QVERIFY(ci.getCiBricks().at(j).getMask() == ci_bricks.at(j).getMask());
-        }
+//            QVERIFY(&(ci.getCiBricks().at(j)) == &(ci_bricks.at(j)));
+
+//            QVERIFY(ci.getCiBricks().at(j).getContent() == ci_bricks.at(j).getContent());
+//            QVERIFY(ci.getCiBricks().at(j).getMask() == ci_bricks.at(j).getMask());
+//        }
     }
 
     // CiBrick set/get index/length
@@ -272,18 +274,33 @@ void CiTest::testCiBricks()
         }
 
 
+        // ciBricksAreEqual
+        qDebug() << "ciBricksAreEqual";
 
-        ci_bricks.clear();
+        for (int r=1; r<=255; r++) {
 
-        for (int j=0; j<10; j++) {
+            ci_bricks.clear();
 
-            randContent = randByte();
-            randMask = randByte();
+            for (int j=0; j<=r; j++) {
 
-            ci_bricks.append(CI_Brick(randContent, randMask));
+                randContent = randByte();
+                randMask = randByte();
+
+                ci_bricks.append(CI_Brick(randContent, randMask));
+            }
+
+            ci.setCiBricks(ci_bricks);
+            QVERIFY(ci.ciBricksAreEqual(ci_bricks));
         }
+
+        // Empty ciBricksAreEqual
+        ci_bricks.clear();
         ci.setCiBricks(ci_bricks);
         QVERIFY(ci.ciBricksAreEqual(ci_bricks));
+
+
+
+
 
 //        for (int i=0; i<l-ci_bricks.size(); i++) {
 
@@ -360,6 +377,8 @@ void CiTest::testRandomCiBricks()
 
         QVERIFY(ci.getCiBricks().size() == ci_bricks.size());
 
+        QVERIFY(ci.ciBricksAreEqual(ci_bricks));
+
         for (int j=0; j<ci_bricks.size(); j++) {
             QVERIFY(&(ci.getCiBricks().at(i)) == &(ci_bricks.at(i)));
 
@@ -406,6 +425,28 @@ void CiTest::testRandomCiBricks()
         ci.resizeCiBricks();
 
         QVERIFY(ci.getCiBricks().size() == rand);
+    }
+
+
+    // ciBricksAreEqual
+    qDebug() << "ciBricksAreEqual";
+
+    for (int r=1; r<=1000; r++) {
+
+        ci_bricks.clear();
+
+        rand = randByte();
+
+        for (int j=0; j<=rand; j++) {
+
+            randContent = randByte();
+            randMask = randByte();
+
+            ci_bricks.append(CI_Brick(randContent, randMask));
+        }
+
+        ci.setCiBricks(ci_bricks);
+        QVERIFY(ci.ciBricksAreEqual(ci_bricks));
     }
 }
 
