@@ -17,6 +17,7 @@ private Q_SLOTS:
     void testRandomGetterSetter();
     void testCiBricks();
     void testRandomCiBricks();
+    void testPathFunctions();
     void cleanupTestCase();
 
 private:
@@ -449,6 +450,31 @@ void CiTest::testRandomCiBricks()
         QVERIFY(ci.ciBricksAreEqual(ci_bricks));
     }
 }
+
+
+void CiTest::testPathFunctions()
+{
+    ci_bricks.clear();
+
+    for (int i=0; i<=255; i++) {
+        ci_bricks.append(CI_Brick(i));
+        qDebug() << ci_bricks.at(i).getContent();
+    }
+    ci.setCiBricks(ci_bricks);
+    qDebug() << ci.getFullPath();
+
+
+    ci_bricks.clear();
+
+    for (int i=0; i<=255; i++) {
+        ci_bricks.append(CI_Brick(randByte()));
+        qDebug() << ci_bricks.at(randByte()).getContent();
+    }
+    ci.setCiBricks(ci_bricks);
+    qDebug() << ci.getFullPath();
+}
+
+
 
 quint8 CiTest::randByte()
 {

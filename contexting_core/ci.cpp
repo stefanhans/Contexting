@@ -126,3 +126,47 @@ void CI::setCiBrickMask(const quint8 mask, quint8 index)
 {
     ciBricks[index].setMask(mask);
 }
+
+
+
+
+
+/*
+ * Path functions
+ */
+QString CI::getFullPath()
+{
+    QString out = "./";
+
+    for (int i=0; i<ciBricks.size(); i++) {
+
+        out += ((CI_Brick) ciBricks.at(i)).contentToPath() + '/';
+    }
+
+    return out;
+}
+
+QString CI::getRoutingPath() const
+{
+    QString out;
+
+    return out;
+
+}
+
+QString CI::getContextPath() const
+{
+    QString out;
+
+    return out;
+}
+
+
+/*
+ * Validate
+ */
+bool CI::validate()
+{
+    return ciBricks.size() == ciSize;
+}
+

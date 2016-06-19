@@ -72,3 +72,28 @@ bool CI_Brick::hasFullMask() const
 {
     return mask == 255;
 }
+
+QString CI_Brick::contentToHex()
+{
+    return QString("%1").arg(content, 2, 16, QLatin1Char('0'));
+}
+
+QString CI_Brick::maskToHex()
+{
+    return QString("%1").arg(mask, 2, 16, QLatin1Char('0'));
+}
+
+
+QString CI_Brick::contentToBinary()
+{
+    return QString("%1").arg(content, 8, 2, QLatin1Char('0'));
+}
+
+QString CI_Brick::maskToBinary()
+{
+    return QString("%1").arg(mask, 8, 2, QLatin1Char('0'));
+}
+
+QString CI_Brick::contentToPath() {
+    return contentToHex().at(0) + '/' + contentToHex().at(1);
+}

@@ -30,6 +30,14 @@ public:
     bool hasEmptyMask() const;
     bool hasFullMask() const;
 
+    QString contentToHex();
+    QString maskToHex();
+
+    QString contentToBinary();
+    QString maskToBinary();
+
+    QString contentToPath();
+
 private:
 
     quint8 content;

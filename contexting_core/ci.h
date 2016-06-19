@@ -73,6 +73,19 @@ public:
     quint8 getCiBrickMask(quint8 index);
     void setCiBrickMask(const quint8 mask, quint8 index);
 
+
+    /*
+     * Path functions
+     */
+    QString getFullPath();
+    QString getRoutingPath() const;
+    QString getContextPath() const;
+
+    /*
+     * Validate
+     */
+    bool validate();
+
 private:
 
     quint8 ciType;
