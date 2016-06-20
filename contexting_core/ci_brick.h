@@ -37,6 +37,8 @@ public:
     QString maskToBinary();
 
     QString contentToPath();
+    QString contextToRoute();
+    QString contextToSearch();
 
 private:
 

@@ -132,6 +132,11 @@ void Ci_brickTest::testStringFunctions()
 
         qDebug() << ci_brick.contentToHex().at(0) + '/' + ci_brick.contentToHex().at(1);
         QVERIFY(ci_brick.contentToPath() == ci_brick.contentToHex().at(0) + '/' + ci_brick.contentToHex().at(1));
+
+        qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
+
+        ci_brick.setMask(0);
+        qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
     }
 }
 

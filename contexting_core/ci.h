@@ -79,7 +79,12 @@ public:
      */
     QString getFullPath();
     QString getRoutingPath() const;
-    QString getContextPath() const;
+
+    /*
+     * Context functions
+     */
+    QString getContextRoute() ;
+    QString getContextSearch() ;
 
     /*
      * Validate

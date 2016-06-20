@@ -94,6 +94,38 @@ QString CI_Brick::maskToBinary()
     return QString("%1").arg(mask, 8, 2, QLatin1Char('0'));
 }
 
-QString CI_Brick::contentToPath() {
+QString CI_Brick::contentToPath()
+{
     return contentToHex().at(0) + '/' + contentToHex().at(1);
 }
+
+QString CI_Brick::contextToRoute()
+{
+    QString out = "";
+
+    if(maskToHex().at(0) == '0') {
+        out += contentToHex().at(0);
+    }
+
+    if(maskToHex().at(1) == '0') {
+        out += contentToHex().at(1);
+    }
+
+    return out;
+}
+
+QString CI_Brick::contextToSearch()
+{
+    QString out = "";
+
+    if(maskToHex().at(0) != '0') {
+        out += contentToHex().at(0);
+        out += contentToHex().at(1);
+    }
+    else if(maskToHex().at(1) != '0') {
+        out += contentToHex().at(1);
+    }
+
+    return out;
+}
+

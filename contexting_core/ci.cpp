@@ -148,15 +148,39 @@ QString CI::getFullPath()
 
 QString CI::getRoutingPath() const
 {
-    QString out;
+    QString out = "./";
+
+    for (int i=0; i<ciBricks.size(); i++) {
+
+        out += ((CI_Brick) ciBricks.at(i)).contextToRoute() + '/';
+    }
 
     return out;
-
 }
 
-QString CI::getContextPath() const
-{
+/*
+ * Context functions
+ */
+QString CI::getContextRoute() {
+
     QString out;
+
+    for (int i=0; i<ciBricks.size(); i++) {
+
+        out += ((CI_Brick) ciBricks.at(i)).contextToRoute();
+    }
+
+    return out;
+}
+
+QString CI::getContextSearch() {
+
+    QString out;
+
+    for (int i=0; i<ciBricks.size(); i++) {
+
+        out += ((CI_Brick) ciBricks.at(i)).contextToSearch();
+    }
 
     return out;
 }
