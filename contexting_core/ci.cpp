@@ -136,11 +136,15 @@ void CI::setCiBrickMask(const quint8 mask, quint8 index)
  */
 QString CI::getFullPath()
 {
-    QString out = "./";
+    QString out;
 
     for (int i=0; i<ciBricks.size(); i++) {
 
-        out += ((CI_Brick) ciBricks.at(i)).contentToPath() + '/';
+        out += ((CI_Brick) ciBricks.at(i)).contentToPath();
+
+        if(i < (ciBricks.size()-1)) {
+            out += '/';
+        }
     }
 
     return out;
@@ -148,11 +152,15 @@ QString CI::getFullPath()
 
 QString CI::getRoutingPath() const
 {
-    QString out = "./";
+    QString out;
 
     for (int i=0; i<ciBricks.size(); i++) {
 
-        out += ((CI_Brick) ciBricks.at(i)).contextToRoutePath() + '/';
+        out += ((CI_Brick) ciBricks.at(i)).contextToRoutePath();
+
+        if(i < (ciBricks.size()-1)) {
+            out += '/';
+        }
     }
 
     return out;
@@ -168,18 +176,6 @@ QString CI::getContextRoute() {
     for (int i=0; i<ciBricks.size(); i++) {
 
         out += ((CI_Brick) ciBricks.at(i)).contextToRoute();
-    }
-
-    return out;
-}
-
-QString CI::getContextSearch() {
-
-    QString out;
-
-    for (int i=0; i<ciBricks.size(); i++) {
-
-        out += ((CI_Brick) ciBricks.at(i)).contextToSearch();
     }
 
     return out;

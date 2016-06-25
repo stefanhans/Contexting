@@ -95,6 +95,12 @@ QString CI_Brick::maskToBinary() const
 }
 
 
+QString CI_Brick::contentToPath() const
+{
+    return contentToHex().at(0) + '/' + contentToHex().at(1);
+}
+
+
 QString CI_Brick::contextToRoute() const
 {
     QString out = "";
@@ -108,28 +114,6 @@ QString CI_Brick::contextToRoute() const
     }
 
     return out;
-}
-
-
-QString CI_Brick::contextToSearch() const
-{
-    QString out = "";
-
-    if(maskToHex().at(0) != '0') {
-        out += contentToHex().at(0);
-        out += contentToHex().at(1);
-    }
-    else if(maskToHex().at(1) != '0') {
-        out += contentToHex().at(1);
-    }
-
-    return out;
-}
-
-
-QString CI_Brick::contentToPath() const
-{
-    return contentToHex().at(0) + '/' + contentToHex().at(1);
 }
 
 

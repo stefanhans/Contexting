@@ -47,6 +47,7 @@ private:
     quint8 randMask;
 
     quint8 randByte();
+    quint8 randByteUnique();
 };
 
 CiTest::CiTest()
@@ -432,7 +433,7 @@ void CiTest::testRandomCiBricks()
     // ciBricksAreEqual
     qDebug() << "ciBricksAreEqual";
 
-    for (int r=1; r<=1000; r++) {
+    for (int r=1; r<=10; r++) {
 
         ci_bricks.clear();
 
@@ -440,8 +441,8 @@ void CiTest::testRandomCiBricks()
 
         for (int j=0; j<=rand; j++) {
 
-            randContent = randByte();
-            randMask = randByte();
+            randContent = randByteUnique();
+            randMask = randByteUnique();
 
             ci_bricks.append(CI_Brick(randContent, randMask));
         }
@@ -468,7 +469,7 @@ void CiTest::testPathFunctions()
 
     for (int i=0; i<=255; i++) {
         ci_bricks.append(CI_Brick(randByte()));
-        qDebug() << ci_bricks.at(randByte()).getContent();
+        qDebug() << ci_bricks.at(randByteUnique()).getContent();
     }
     ci.setCiBricks(ci_bricks);
     qDebug() << ci.getFullPath();
@@ -486,6 +487,19 @@ quint8 CiTest::randByte()
 
     return qrand() % 256;
 }
+
+quint8 CiTest::randByteUnique()
+{
+    quint8 rand_1 = randByte();
+    quint8 rand_2 = randByte();
+
+    while ( rand_1 == rand_2 ) {
+        rand_2 = randByte();
+    }
+
+    return rand_2;
+}
+
 
 void CiTest::cleanupTestCase()
 {

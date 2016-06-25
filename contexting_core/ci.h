@@ -84,7 +84,6 @@ public:
      * Context functions
      */
     QString getContextRoute() ;
-    QString getContextSearch() ;
 
     /*
      * Validate

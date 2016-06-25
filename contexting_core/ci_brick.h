@@ -36,10 +36,9 @@ public:
     QString contentToBinary() const;
     QString maskToBinary() const;
 
-    QString contextToRoute() const;
-    QString contextToSearch() const;
-
     QString contentToPath() const;
+
+    QString contextToRoute() const;
     QString contextToRoutePath() const;
 
 private:
