@@ -472,6 +472,8 @@ void CiTest::testPathFunctions()
     }
     ci.setCiBricks(ci_bricks);
     qDebug() << ci.getFullPath();
+
+    qDebug() << ci.getRoutingPath();
 }
 
 

@@ -152,7 +152,7 @@ QString CI::getRoutingPath() const
 
     for (int i=0; i<ciBricks.size(); i++) {
 
-        out += ((CI_Brick) ciBricks.at(i)).contextToRoute() + '/';
+        out += ((CI_Brick) ciBricks.at(i)).contextToRoutePath() + '/';
     }
 
     return out;

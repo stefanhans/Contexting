@@ -17,6 +17,7 @@ private Q_SLOTS:
     void testMaskFunctions();
     void testCompareFunctions();
     void testStringFunctions();
+    void testRandomStringFunctions();
     void cleanupTestCase();
 
 private:
@@ -25,6 +26,12 @@ private:
 
     CI_Brick ci_brick;
     CI_Brick ci_brick_2;
+
+    quint8 rand;
+    quint8 randContent;
+    quint8 randMask;
+
+    quint8 randByte();
 };
 
 
@@ -36,8 +43,15 @@ void Ci_brickTest::initTestCase()
 {
 }
 
+
 void Ci_brickTest::testGetterSetter()
-{
+{    
+    //quint8 getContent() const;
+    //void setContent(const quint8 &value);
+
+    //quint8 getMask() const;
+    //void setMask(const quint8 &value);
+
     for (int i = 0; i<=255; i++) {
         content=i;
         ci_brick.setContent(i);
@@ -52,27 +66,52 @@ void Ci_brickTest::testGetterSetter()
     }
 }
 
+
 void Ci_brickTest::testCopyAndAssignment()
-{
+{   
+    //bool operator==(const CI_Brick &ci_brick);
+
     ci_brick_2 = ci_brick;
     QVERIFY(ci_brick_2 == ci_brick);
 }
 
+
 void Ci_brickTest::testMaskFunctions()
-{
+{    
+    //bool hasEmptyMask() const;
+
     ci_brick.setMask(0);
     QVERIFY(ci_brick.hasEmptyMask());
 
+    for (int i = 1; i<=255; i++) {
+        ci_brick.setMask(i);
+        QVERIFY( ! ci_brick.hasEmptyMask());
+    }
+
+
+    //bool hasFullMask() const;
+
     ci_brick.setMask(255);
     QVERIFY(ci_brick.hasFullMask());
+
+    for (int i = 0; i<255; i++) {
+        ci_brick.setMask(i);
+        QVERIFY( ! ci_brick.hasFullMask());
+    }
 }
+
 
 void Ci_brickTest::testCompareFunctions()
 {
+    //bool contentMatch(quint8 otherContent) const;
+
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
         QVERIFY(ci_brick.contentMatch(i));
     }
+
+
+    //bool contextMatch(quint8 otherContent, quint8 otherMask) const;
 
     ci_brick.setContent(0);
     ci_brick.setMask(0);
@@ -85,11 +124,17 @@ void Ci_brickTest::testCompareFunctions()
     QVERIFY2(ci_brick.contextMatch(0, 1), "0,1: ci_brick.contentMatch(0, 1)"); // equal content and other mask ignores
     QVERIFY2(ci_brick.contextMatch(1, 1), "0,1: ci_brick.contentMatch(1, 1)"); // unequal content, but both masks ignore
 
+
+    //bool contentMatch(CI_Brick otherBrick) const;
+
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
         ci_brick_2.setContent(i);
         QVERIFY(ci_brick.contentMatch(ci_brick_2));
     }
+
+
+    //bool contextMatch(CI_Brick otherBrick) const;
 
     ci_brick.setContent(0);
     ci_brick.setMask(0);
@@ -110,8 +155,12 @@ void Ci_brickTest::testCompareFunctions()
     QVERIFY2(ci_brick.contextMatch(ci_brick_2), "0,1: ci_brick.contentMatch(CI_Brick - 1, 1)"); // unequal content, but both masks ignore
 }
 
+
 void Ci_brickTest::testStringFunctions()
-{
+{    
+    //QString contentToHex() const;
+    //QString maskToHex() const;
+
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
         ci_brick.setMask(i);
@@ -121,23 +170,140 @@ void Ci_brickTest::testStringFunctions()
         QVERIFY(((quint8) ci_brick.contentToHex().toUInt(&ok, 16)) == i);
         QVERIFY(((quint8) ci_brick.maskToHex().toUInt(&ok, 16)) == i);
 
-        qDebug() << ci_brick.contentToHex();
-        qDebug() << ci_brick.maskToHex();
+//        qDebug() << ci_brick.contentToHex();
+//        qDebug() << ci_brick.maskToHex();
 
+
+        //QString contentToBinary() const;
+        //QString maskToBinary() const;
 
         QVERIFY(((quint8) ci_brick.contentToBinary().toUInt(&ok, 2)) == i);
         QVERIFY(((quint8) ci_brick.maskToBinary().toUInt(&ok, 2)) == i);
-        qDebug() << ci_brick.contentToBinary();
-        qDebug() << ci_brick.maskToBinary();
 
-        qDebug() << ci_brick.contentToHex().at(0) + '/' + ci_brick.contentToHex().at(1);
+//        qDebug() << ci_brick.contentToBinary();
+//        qDebug() << ci_brick.maskToBinary();
+
+
+        //QString contextToRoute() const;
+
+        QString route;
+        if(ci_brick.maskToHex().at(0) == '0') {
+            route += ci_brick.contentToHex().at(0);
+
+            if(ci_brick.contentToHex().at(1) == '0') {
+                route += ci_brick.contentToHex().at(1);
+            }
+        }
+
+        QVERIFY(ci_brick.contextToRoute() == route);
+
+        //QString contextToSearch() const;
+// TODO NEXT
+
+        //QString contentToPath() const;
+
         QVERIFY(ci_brick.contentToPath() == ci_brick.contentToHex().at(0) + '/' + ci_brick.contentToHex().at(1));
 
-        qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
 
-        ci_brick.setMask(0);
-        qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
+        //QString contextToRoutePath() const;
+
+        route.clear();
+        if(ci_brick.maskToHex().at(0) == '0') {
+            route += ci_brick.contentToHex().at(0);
+
+            if(ci_brick.contentToHex().at(1) == '0') {
+                route += '/' + ci_brick.contentToHex().at(1);
+            }
+        }
+        QVERIFY(ci_brick.contextToRoutePath() == route);
+
+//        qDebug() << ci_brick.contentToHex().at(0) + '/' + ci_brick.contentToHex().at(1);
+
+//        qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
+
+//        ci_brick.setMask(0);
+//        qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
     }
+
+    ci_brick.setContent(0xab);
+    ci_brick.setMask(0x00);
+    QVERIFY(ci_brick.contentToHex() == ci_brick.contextToRoute() + ci_brick.contextToSearch());
+
+    qDebug() << ci_brick.contextToRoutePath();
+//    qDebug() << "--------------------------------------------------";
+//    qDebug() << "ci_brick.contentToHex(): " << ci_brick.contentToHex();
+//    qDebug() << "ci_brick.maskToHex(): " << ci_brick.maskToHex();
+//    qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
+//    qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
+
+
+    ci_brick.setMask(0x01);
+    QVERIFY(ci_brick.contentToHex() == ci_brick.contextToRoute() + ci_brick.contextToSearch());
+
+    qDebug() << ci_brick.contextToRoutePath();
+//    qDebug() << "--------------------------------------------------";
+//    qDebug() << "ci_brick.contentToHex(): " << ci_brick.contentToHex();
+//    qDebug() << "ci_brick.maskToHex(): " << ci_brick.maskToHex();
+//    qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
+//    qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
+
+    ci_brick.setMask(0x10);
+    QVERIFY(ci_brick.contentToHex() == ci_brick.contextToRoute() + ci_brick.contextToSearch());
+
+    qDebug() << ci_brick.contextToRoutePath();
+//    qDebug() << "--------------------------------------------------";
+//    qDebug() << "ci_brick.contentToHex(): " << ci_brick.contentToHex();
+//    qDebug() << "ci_brick.maskToHex(): " << ci_brick.maskToHex();
+//    qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
+//    qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
+
+    ci_brick.setMask(0x11);
+    QVERIFY(ci_brick.contentToHex() == ci_brick.contextToRoute() + ci_brick.contextToSearch());
+
+    qDebug() << ci_brick.contextToRoutePath();
+//    qDebug() << "--------------------------------------------------";
+//    qDebug() << "ci_brick.contentToHex(): " << ci_brick.contentToHex();
+//    qDebug() << "ci_brick.maskToHex(): " << ci_brick.maskToHex();
+//    qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
+//    qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
+
+}
+
+
+void Ci_brickTest::testRandomStringFunctions()
+{
+    for (int i=0; i<1000; i++) {
+
+        randContent = randByte();
+        randMask = randByte();
+
+        ci_brick.setContent(randContent);
+        ci_brick.setMask(randMask);
+
+        QVERIFY(ci_brick.contentToHex() == ci_brick.contextToRoute() + ci_brick.contextToSearch());
+
+//        qDebug() << "--------------------------------------------------";
+//        qDebug() << "ci_brick.contentToHex(): " << ci_brick.contentToHex();
+//        qDebug() << "ci_brick.maskToHex(): " << ci_brick.maskToHex();
+//        qDebug() << "ci_brick.contextToSearch(): " << ci_brick.contextToSearch();
+//        qDebug() << "ci_brick.contextToRoute(): " << ci_brick.contextToRoute();
+
+//        for(int s=0; s<100000; s++) {
+//            rand = randByte();
+//        }
+
+    }
+
+}
+
+
+quint8 Ci_brickTest::randByte()
+{
+
+    QTime time = QTime::currentTime();
+    qsrand((uint)time.msec());
+
+    return qrand() % 256;
 }
 
 void Ci_brickTest::cleanupTestCase()
@@ -149,3 +315,4 @@ void Ci_brickTest::cleanupTestCase()
 QTEST_APPLESS_MAIN(Ci_brickTest)
 
 #include "tst_ci_bricktest.moc"
+

@@ -73,48 +73,45 @@ bool CI_Brick::hasFullMask() const
     return mask == 255;
 }
 
-QString CI_Brick::contentToHex()
+QString CI_Brick::contentToHex() const
 {
     return QString("%1").arg(content, 2, 16, QLatin1Char('0'));
 }
 
-QString CI_Brick::maskToHex()
+QString CI_Brick::maskToHex() const
 {
     return QString("%1").arg(mask, 2, 16, QLatin1Char('0'));
 }
 
 
-QString CI_Brick::contentToBinary()
+QString CI_Brick::contentToBinary() const
 {
     return QString("%1").arg(content, 8, 2, QLatin1Char('0'));
 }
 
-QString CI_Brick::maskToBinary()
+QString CI_Brick::maskToBinary() const
 {
     return QString("%1").arg(mask, 8, 2, QLatin1Char('0'));
 }
 
-QString CI_Brick::contentToPath()
-{
-    return contentToHex().at(0) + '/' + contentToHex().at(1);
-}
 
-QString CI_Brick::contextToRoute()
+QString CI_Brick::contextToRoute() const
 {
     QString out = "";
 
     if(maskToHex().at(0) == '0') {
         out += contentToHex().at(0);
-    }
 
-    if(maskToHex().at(1) == '0') {
-        out += contentToHex().at(1);
+        if(maskToHex().at(1) == '0') {
+            out += contentToHex().at(1);
+        }
     }
 
     return out;
 }
 
-QString CI_Brick::contextToSearch()
+
+QString CI_Brick::contextToSearch() const
 {
     QString out = "";
 
@@ -129,3 +126,24 @@ QString CI_Brick::contextToSearch()
     return out;
 }
 
+
+QString CI_Brick::contentToPath() const
+{
+    return contentToHex().at(0) + '/' + contentToHex().at(1);
+}
+
+
+QString CI_Brick::contextToRoutePath() const
+{
+    QString out = "";
+
+    if(maskToHex().at(0) == '0') {
+        out += contentToHex().at(0);
+
+        if(maskToHex().at(1) == '0') {
+            out += '/' + contentToHex().at(1);
+        }
+    }
+
+    return out;
+}

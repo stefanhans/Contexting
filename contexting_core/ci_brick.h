@@ -30,15 +30,17 @@ public:
     bool hasEmptyMask() const;
     bool hasFullMask() const;
 
-    QString contentToHex();
-    QString maskToHex();
+    QString contentToHex() const;
+    QString maskToHex() const;
 
-    QString contentToBinary();
-    QString maskToBinary();
+    QString contentToBinary() const;
+    QString maskToBinary() const;
 
-    QString contentToPath();
-    QString contextToRoute();
-    QString contextToSearch();
+    QString contextToRoute() const;
+    QString contextToSearch() const;
+
+    QString contentToPath() const;
+    QString contextToRoutePath() const;
 
 private:
 
