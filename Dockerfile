@@ -1,4 +1,5 @@
-FROM stefanhans/contexting
+FROM stefanhans/contexting:local
+
 MAINTAINER Stefan Hans <stefan.hans@telefonica.com> 
 
 ENV CONTEXTING_HOME /home/Contexting
