@@ -459,22 +459,24 @@ void CiTest::testPathFunctions()
 
     for (int i=0; i<=255; i++) {
         ci_bricks.append(CI_Brick(i));
-        qDebug() << ci_bricks.at(i).getContent();
+//        qDebug() << ci_bricks.at(i).getContent();
     }
     ci.setCiBricks(ci_bricks);
-    qDebug() << ci.getFullPath();
+//    qDebug() << ci.getFullPath();
 
 
     ci_bricks.clear();
 
     for (int i=0; i<=255; i++) {
         ci_bricks.append(CI_Brick(randByte()));
-        qDebug() << ci_bricks.at(randByteUnique()).getContent();
+//        qDebug() << ci_bricks.at(randByteUnique()).getContent();
     }
     ci.setCiBricks(ci_bricks);
-    qDebug() << ci.getFullPath();
 
-    qDebug() << ci.getRoutingPath();
+//    qDebug() << ci.getFullPath();
+
+//    qDebug() << ci.getRoutingPath();
+
 }
 
 
