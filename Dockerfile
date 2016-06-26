@@ -2,6 +2,7 @@ FROM stefanhans/contexting
 MAINTAINER Stefan Hans <stefan.hans@telefonica.com> 
 
 ENV CONTEXTING_HOME /home/Contexting
+ENV QT_VERSION_STR 5_5_1
 
 ADD contexting_core/* ${CONTEXTING_HOME}/contexting_core/
 ADD unit_testing/test* ${CONTEXTING_HOME}/unit_testing/
