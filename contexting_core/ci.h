@@ -43,41 +43,20 @@ public:
 
 
     /*
-     * ciBricks
+     * ciBricks complete
      */
-    const QVector<CI_Brick> getCiBricks() const;
-    void setCiBricks(const QVector<CI_Brick> &value);
+    const QVector<CI_Brick> getCiBricks(quint8 index=0, quint8 length=0) const;
+    void setCiBricks(const QVector<CI_Brick> &value, quint8 index=0);
 
     /*
-     *
+     * Is equal to another ciBrick
      */
-    const QVector<CI_Brick> getCiBricks(quint8 index, quint8 length) const;
-    void setCiBricks(const QVector<CI_Brick> &value, quint8 index);
-
-    void appendCiBricks(const QVector<CI_Brick> &value);
-
-
-    /*
-     * Resize ciBricks according to ciSize
-     */
-    void resizeCiBricks();
-
     bool ciBricksAreEqual(const QVector<CI_Brick> &value);
-
-    CI_Brick getCiBrick(quint8 index) const;
-    void setCiBrick(const CI_Brick &value, quint8 index);
-
-    quint8 getCiBrickContent(quint8 index);
-    void setCiBrickContent(const quint8 content, quint8 index);
-
-    quint8 getCiBrickMask(quint8 index);
-    void setCiBrickMask(const quint8 mask, quint8 index);
-
 
     /*
      * Path functions
      */
-    QString getFullPath();
+    QString getFullPath() const;
     QString getRoutingPath() const;
 
     /*

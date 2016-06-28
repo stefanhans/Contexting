@@ -2,6 +2,10 @@
 
 #include <QDebug>
 
+
+/*
+ * ciType
+ */
 quint8 CI::getCiType() const
 {
     return ciType;
@@ -12,6 +16,10 @@ void CI::setCiType(const quint8 &value)
     ciType = value;
 }
 
+
+/*
+ * rootCIC
+ */
 CI_Brick CI::getRootCIC() const
 {
     return rootCIC;
@@ -22,23 +30,30 @@ void CI::setRootCIC(const CI_Brick &value)
     rootCIC = value;
 }
 
+quint8 CI::getRootCicContent() const
+{
+    return rootCIC.getContent();
+}
 
-void CI::setRootCicContent(const quint8 &value) {
+void CI::setRootCicContent(const quint8 &value)
+{
     rootCIC.setContent(value);
 }
 
-void CI::setRootCicMask(const quint8 &value) {
+quint8 CI::getRootCicMask() const
+{
+    return rootCIC.getMask();
+}
+
+void CI::setRootCicMask(const quint8 &value)
+{
     rootCIC.setMask(value);
 }
 
 
-quint8 CI::getRootCicContent() const {
-    return rootCIC.getContent();
-}
-quint8 CI::getRootCicMask() const {
-    return rootCIC.getMask();
-}
-
+/*
+ * ciSize
+ */
 quint8 CI::getCiSize() const
 {
     return ciSize;
@@ -49,45 +64,34 @@ void CI::setCiSize(const quint8 &value)
     ciSize = value;
 }
 
-const QVector<CI_Brick> CI::getCiBricks() const
-{
-    return ciBricks;
-}
 
-void CI::setCiBricks(const QVector<CI_Brick> &value)
-{
-    ciBricks = value;
-}
-
+/*
+ * ciBricks
+ */
 
 const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
 {
+    if(length == 0) {
+        return ciBricks.mid(index, 255-index);
+    }
     return ciBricks.mid(index, length);
 }
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
     for(int i=0; i<value.size(); i++) {
+//        qDebug() << QString("%1: ciBricks.insert(%2, %3 | %4)").arg(i).arg(index).arg(((CI_Brick) value.at(i)).getContent()).arg(((CI_Brick) value.at(i)).getMask());
         ciBricks.insert(index++, value.at(i));
     }
 }
 
-void CI::appendCiBricks(const QVector<CI_Brick> &value) {
-
-    setCiBricks(value, ciBricks.size());
-}
-
-
-void CI::resizeCiBricks()
-{
-    ciBricks.resize(ciSize);
-}
-
 bool CI::ciBricksAreEqual(const QVector<CI_Brick> &value)
 {
-    if ( ciBricks.size() != value.size() ) return false;
+    for (int i=0; i<value.size(); i++) {
 
-    for (int i=0; i<ciBricks.size(); i++) {
+//        qDebug() << QString("%1: ciBricks.at(i).getContent(): %2 - %3").arg(i).arg(ciBricks.at(i).getContent()).arg(value.at(i).getContent());
+//        qDebug() << QString("%1: ciBricks.at(i).getMask(): %2 - %3").arg(i).arg(ciBricks.at(i).getMask()).arg(value.at(i).getMask());
+
         if(ciBricks.at(i).getContent() != value.at(i).getContent()) return false;
         if(ciBricks.at(i).getMask() != value.at(i).getMask()) return false;
     }
@@ -96,45 +100,10 @@ bool CI::ciBricksAreEqual(const QVector<CI_Brick> &value)
 
 
 
-CI_Brick CI::getCiBrick(quint8 index) const
-{
-    return (CI_Brick) ciBricks.at(index);
-}
-
-
-void CI::setCiBrick(const CI_Brick &value, quint8 index)
-{
-    ciBricks.replace(index, value);
-}
-
-quint8 CI::getCiBrickContent(quint8 index)
-{
-    return ciBricks[index].getContent();
-}
-
-void CI::setCiBrickContent(const quint8 content, quint8 index)
-{
-    ciBricks[index].setContent(content);
-}
-
-quint8 CI::getCiBrickMask(quint8 index)
-{
-    return ciBricks[index].getMask();
-}
-
-void CI::setCiBrickMask(const quint8 mask, quint8 index)
-{
-    ciBricks[index].setMask(mask);
-}
-
-
-
-
-
 /*
  * Path functions
  */
-QString CI::getFullPath()
+QString CI::getFullPath() const
 {
     QString out;
 
@@ -169,7 +138,8 @@ QString CI::getRoutingPath() const
 /*
  * Context functions
  */
-QString CI::getContextRoute() {
+QString CI::getContextRoute()
+{
 
     QString out;
 
