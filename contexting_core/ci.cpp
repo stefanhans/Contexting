@@ -72,13 +72,14 @@ void CI::setCiSize(const quint8 &value)
 const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
 {
     if(length == 0) {
-        return ciBricks.mid(index, 255-index);
+        return ciBricks.mid(index, ciSize);
     }
     return ciBricks.mid(index, length);
 }
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
+//    qDebug() << QString("CI::setCiBricks(%1, quint8 index)").arg(value.size());
     for(int i=0; i<value.size(); i++) {
 //        qDebug() << QString("%1: ciBricks.insert(%2, %3 | %4)").arg(i).arg(index).arg(((CI_Brick) value.at(i)).getContent()).arg(((CI_Brick) value.at(i)).getMask());
         ciBricks.insert(index++, value.at(i));
