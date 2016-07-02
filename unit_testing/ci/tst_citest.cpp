@@ -49,6 +49,10 @@ private:
 
     quint8 randByte();
     quint8 randByteUnique();
+
+    QVector<quint8> testInts;
+
+    bool ciBricksAreEqual(const QVector<CI_Brick> &value_1, const QVector<CI_Brick> &value_2);
 };
 
 CiTest::CiTest()
@@ -71,6 +75,19 @@ void CiTest::initTestCase()
     ci_brick_all_1.setMask(1);
 
     ci_bricks_full.fill(ci_brick_all_0, 255);
+
+    testInts.append(0);
+    testInts.append(1);
+    testInts.append(2);
+    testInts.append(randByteUnique());
+    testInts.append(randByteUnique());
+    testInts.append(randByteUnique());
+    testInts.append(randByteUnique());
+    testInts.append(randByteUnique());
+    testInts.append(randByteUnique());
+    testInts.append(randByteUnique());
+    testInts.append(254);
+    testInts.append(255);
 
 }
 
@@ -189,41 +206,35 @@ void CiTest::testCiBricks()
 
         ci_bricks.fill(ci_brick_all_1, l);
         ci.setCiBricks(ci_bricks);
+        ci.setCiSize(ci_bricks.size());
 
-        QVERIFY(ci.ciBricksAreEqual(ci_bricks));
+        QVERIFY(ciBricksAreEqual((QVector<CI_Brick>) ci.getCiBricks(), ci_bricks));
     }
 
     // CiBrick set/get index/length
     qDebug() << "CiBrick set/get index/length";
 
+    foreach(quint8 length, testInts) {
 
-    QVector<quint8> testInts = { 0, 1, 2, 3, 64, 128, 254, 255 };
-    quint8 testLength;
-
-    foreach(testLength, testInts) {
-        qDebug() << testLength;
-
-//        int length = testLength;
-
-        for (int index=0; index<=255-testLength; index++) {
-            if(index == 255-testLength) {
+        for (int index=0; index<=255-length; index++) {
+            if(index == 255-length) {
 
 
 
                 ci_bricks.clear();
                 ci.setCiBricks(ci_bricks_full);
 
-                ci_bricks.fill(ci_brick_all_1, testLength);
+                ci_bricks.fill(ci_brick_all_1, length);
                 ci.setCiBricks(ci_bricks, index);
 
-                ci_bricks_2 = ci.getCiBricks(index, testLength);
+                ci_bricks_2 = ci.getCiBricks(index, length);
 
-                //                for (int i=0; i<testLength; i++) {
+                //                for (int i=0; i<length; i++) {
                 //                    ci_bricks_2.at(i).getContent() ==
                 //                }
                 //                QVERIFY(ci.ciBricksAreEqual(ci_bricks));
 
-                qDebug() << index << ": " << testLength << ": " << index + testLength;
+                qDebug() << index << ": " << length << ": " << index + length;
             }
         }
 
@@ -299,6 +310,24 @@ quint8 CiTest::randByteUnique()
     }
 
     return rand_2;
+}
+
+
+
+bool CiTest::ciBricksAreEqual(const QVector<CI_Brick> &value_1, const QVector<CI_Brick> &value_2) {
+
+    if (value_1.size() != value_2.size()) {
+        qDebug() << "value_1.size(): " << value_1.size();
+        qDebug() << "value_2.size(): " << value_2.size();
+        return false;
+    }
+
+    for (int i=0; i<value_1.size(); i++) {
+        if ( ! ((CI_Brick) value_1.at(i) == (CI_Brick) value_2.at(i))) {
+            return false;
+        }
+    }
+    return true;
 }
 
 

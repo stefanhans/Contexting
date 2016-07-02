@@ -13,7 +13,7 @@ public:
         ciType(0),
         rootCIC(),
         ciSize(0),
-        ciBricks(QVector<CI_Brick>(1)) {}
+        ciBrickArray() {}
 
     /*
      * ciType
@@ -49,11 +49,6 @@ public:
     void setCiBricks(const QVector<CI_Brick> &value, quint8 index=0);
 
     /*
-     * Is equal to another ciBrick
-     */
-    bool ciBricksAreEqual(const QVector<CI_Brick> &value);
-
-    /*
      * Path functions
      */
     QString getFullPath() const;
@@ -62,19 +57,14 @@ public:
     /*
      * Context functions
      */
-    QString getContextRoute() ;
-
-    /*
-     * Validate
-     */
-    bool validate();
+    QString getContextRoute();
 
 private:
 
     quint8 ciType;
     CI_Brick rootCIC;
     quint8 ciSize;
-    QVector<CI_Brick> ciBricks;
+    CI_Brick ciBrickArray[255];
 };
 
 #endif // CI_H

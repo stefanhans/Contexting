@@ -68,37 +68,29 @@ void CI::setCiSize(const quint8 &value)
 /*
  * ciBricks
  */
-
 const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
 {
+    QVector<CI_Brick> out;
+
     if(length == 0) {
-        return ciBricks.mid(index, ciSize);
+        for (int i = index; i < ciSize-index; i++) {
+            out.append(ciBrickArray[i]);
+        }
     }
-    return ciBricks.mid(index, length);
+
+    for (int i = index; i < length; i++) {
+        out.append(ciBrickArray[i]);
+    }
+    return out;
 }
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
-//    qDebug() << QString("CI::setCiBricks(%1, quint8 index)").arg(value.size());
     for(int i=0; i<value.size(); i++) {
-//        qDebug() << QString("%1: ciBricks.insert(%2, %3 | %4)").arg(i).arg(index).arg(((CI_Brick) value.at(i)).getContent()).arg(((CI_Brick) value.at(i)).getMask());
-        ciBricks.insert(index++, value.at(i));
+        ciBrickArray[index++] = value.at(i);
     }
+    ciSize = value.size() + index;
 }
-
-bool CI::ciBricksAreEqual(const QVector<CI_Brick> &value)
-{
-    for (int i=0; i<value.size(); i++) {
-
-//        qDebug() << QString("%1: ciBricks.at(i).getContent(): %2 - %3").arg(i).arg(ciBricks.at(i).getContent()).arg(value.at(i).getContent());
-//        qDebug() << QString("%1: ciBricks.at(i).getMask(): %2 - %3").arg(i).arg(ciBricks.at(i).getMask()).arg(value.at(i).getMask());
-
-        if(ciBricks.at(i).getContent() != value.at(i).getContent()) return false;
-        if(ciBricks.at(i).getMask() != value.at(i).getMask()) return false;
-    }
-    return true;
-}
-
 
 
 /*
@@ -108,15 +100,14 @@ QString CI::getFullPath() const
 {
     QString out;
 
-    for (int i=0; i<ciBricks.size(); i++) {
+    for (int i=0; i<ciSize; i++) {
 
-        out += ((CI_Brick) ciBricks.at(i)).contentToPath();
+        out += ((CI_Brick) ciBrickArray[i]).contentToPath();
 
-        if(i < (ciBricks.size()-1)) {
+        if(i < (ciSize-1)) {
             out += '/';
         }
     }
-
     return out;
 }
 
@@ -124,15 +115,14 @@ QString CI::getRoutingPath() const
 {
     QString out;
 
-    for (int i=0; i<ciBricks.size(); i++) {
+    for (int i=0; i<ciSize; i++) {
 
-        out += ((CI_Brick) ciBricks.at(i)).contextToRoutePath();
+        out += ((CI_Brick) ciBrickArray[i]).contextToRoutePath();
 
-        if(i < (ciBricks.size()-1)) {
+        if(i < (ciSize-1)) {
             out += '/';
         }
     }
-
     return out;
 }
 
@@ -144,20 +134,10 @@ QString CI::getContextRoute()
 
     QString out;
 
-    for (int i=0; i<ciBricks.size(); i++) {
+    for (int i=0; i<ciSize; i++) {
 
-        out += ((CI_Brick) ciBricks.at(i)).contextToRoute();
+        out += ((CI_Brick) ciBrickArray[i]).contextToRoute();
     }
-
     return out;
-}
-
-
-/*
- * Validate
- */
-bool CI::validate()
-{
-    return ciBricks.size() == ciSize;
 }
 
