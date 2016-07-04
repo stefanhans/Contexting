@@ -121,31 +121,13 @@ QString CI_Brick::contextToRoute() const
 
 QString CI_Brick::contextToRoutePath(const QChar delim) const
 {
-    QString out;
+    if ( mask == 0) {
+        return QString("%1%2%3").arg(contentToHex().at(0)).arg(delim).arg(contentToHex().at(1));
+    }
 
     if(maskToHex().at(0) == '0') {
-        qDebug() << "at(0) == '0'";
-        out += QString("%1").arg(contentToHex().at(0));
-
-        if(maskToHex().at(1) == '0') {
-            qDebug() << "at(1) == '0'";
-            out +=  QString("%1%2").arg(delim).arg(contentToHex().at(1));
-        }
-        else {
-            qDebug() << "at(0) == '0' && at(1) != '0'";
-
-            if ( out == "/" ) {
-                return "";
-            }
-            return out;
-        }
-    }
-    qDebug()  << "at(0) != '0'";
-
-
-    if ( out == "/" ) {
-        return "";
+        return QString("%1").arg(contentToHex().at(0));
     }
 
-    return out;
+    return QString("");
 }

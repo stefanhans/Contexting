@@ -118,12 +118,10 @@ QString CI::getRoutingPath(const QChar delim) const
 
         qDebug() << ((CI_Brick) ciBrickArray[i]).getContent();
         qDebug() << ((CI_Brick) ciBrickArray[i]).getMask();
-        out += ((CI_Brick) ciBrickArray[i]).contextToRoutePath() + delim;
-        qDebug() << out;
-    }
-
-    if ( out == "/" ) {
-        return "";
+        if ( ! ((CI_Brick) ciBrickArray[i]).contextToRoutePath().isEmpty()) {
+            out += ((CI_Brick) ciBrickArray[i]).contextToRoutePath() + delim;
+            qDebug() << out;
+        }
     }
 
     return out;
