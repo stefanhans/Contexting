@@ -79,15 +79,16 @@ void CiTest::initTestCase()
     testInts.append(0);
     testInts.append(1);
     testInts.append(2);
-    testInts.append(randByteUnique());
-    testInts.append(randByteUnique());
-    testInts.append(randByteUnique());
-    testInts.append(randByteUnique());
-    testInts.append(randByteUnique());
-    testInts.append(randByteUnique());
-    testInts.append(randByteUnique());
-    testInts.append(254);
-    testInts.append(255);
+
+//    testInts.append(randByteUnique());
+//    testInts.append(randByteUnique());
+//    testInts.append(randByteUnique());
+//    testInts.append(randByteUnique());
+//    testInts.append(randByteUnique());
+//    testInts.append(randByteUnique());
+//    testInts.append(randByteUnique());
+//    testInts.append(254);
+//    testInts.append(255);
 
 }
 
@@ -265,27 +266,53 @@ void CiTest::testRandomCiBricks()
 
 void CiTest::testPathFunctions()
 {
-    ci_bricks.clear();
 
-    for (int i=0; i<=255; i++) {
-        ci_bricks.append(CI_Brick(i));
-//        qDebug() << ci_bricks.at(i).getContent();
+//    QString getFullPath(const QChar delim='/') const;
+
+
+    foreach(quint8 length, testInts) {
+//        qDebug() << length;
+
+        ci_bricks.clear();
+
+        for (int i=0; i<length; i++) {
+            rand = randByteUnique();
+            qDebug() << "rand: " << QString("%1: %2 -> %3").arg(length).arg(rand).arg(rand, 2, 16);
+            ci_bricks.append(CI_Brick(rand));
+
+        }
+        qDebug() << ci_bricks.at(0).contentToHex().at(0);
+        qDebug() << ci_bricks.at(0).contentToHex().at(1);
+        qDebug() << ci_bricks.at(0).contentToPath();
+
+        ci.setCiBricks(ci_bricks);
+        qDebug() << ci.getFullPath();
+
     }
-    ci.setCiBricks(ci_bricks);
-//    qDebug() << ci.getFullPath();
+
+//    QString getRoutingPath(const QChar delim='/') const;
 
 
-    ci_bricks.clear();
+    foreach(quint8 length, testInts) {
+        qDebug() << length;
 
-    for (int i=0; i<=255; i++) {
-        ci_bricks.append(CI_Brick(randByte()));
-//        qDebug() << ci_bricks.at(randByteUnique()).getContent();
+        ci_bricks.clear();
+
+        for (int i=0; i<=length; i++) {
+
+            ci_brick.setContent(randByteUnique());
+
+            if (i == length/2) {
+                qDebug() << length << " " << length/2;
+                ci_brick.setMask(1);
+            }
+            ci_bricks.append(ci_brick);
+
+        }
+        ci.setCiBricks(ci_bricks);
+        qDebug() << "ci.getRoutingPath(): " << ci.getRoutingPath();
+
     }
-    ci.setCiBricks(ci_bricks);
-
-//    qDebug() << ci.getFullPath();
-
-//    qDebug() << ci.getRoutingPath();
 
 }
 

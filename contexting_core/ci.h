@@ -51,8 +51,8 @@ public:
     /*
      * Path functions
      */
-    QString getFullPath() const;
-    QString getRoutingPath() const;
+    QString getFullPath(const QChar delim='/') const;
+    QString getRoutingPath(const QChar delim='/') const;
 
     /*
      * Context functions
