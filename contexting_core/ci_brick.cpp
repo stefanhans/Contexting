@@ -1,5 +1,7 @@
 #include "ci_brick.h"
 
+#include <QDebug>
+
 bool CI_Brick::operator==(const CI_Brick &ci_brick)
 {
     return content == ci_brick.content && mask == ci_brick.mask;
@@ -95,9 +97,9 @@ QString CI_Brick::maskToBinary() const
 }
 
 
-QString CI_Brick::contentToPath() const
+QString CI_Brick::contentToPath(const QChar delim) const
 {
-    return contentToHex().at(0) + '/' + contentToHex().at(1);
+    return QString("%1%2%3").arg(contentToHex().at(0)).arg(delim).arg(contentToHex().at(1));
 }
 
 
@@ -117,16 +119,32 @@ QString CI_Brick::contextToRoute() const
 }
 
 
-QString CI_Brick::contextToRoutePath() const
+QString CI_Brick::contextToRoutePath(const QChar delim) const
 {
-    QString out = "";
+    QString out;
 
     if(maskToHex().at(0) == '0') {
-        out += contentToHex().at(0);
+        qDebug() << "at(0) == '0'";
+        out += QString("%1").arg(contentToHex().at(0));
 
         if(maskToHex().at(1) == '0') {
-            out += '/' + contentToHex().at(1);
+            qDebug() << "at(1) == '0'";
+            out +=  QString("%1%2").arg(delim).arg(contentToHex().at(1));
         }
+        else {
+            qDebug() << "at(0) == '0' && at(1) != '0'";
+
+            if ( out == "/" ) {
+                return "";
+            }
+            return out;
+        }
+    }
+    qDebug()  << "at(0) != '0'";
+
+
+    if ( out == "/" ) {
+        return "";
     }
 
     return out;

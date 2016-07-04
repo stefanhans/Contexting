@@ -86,10 +86,11 @@ const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
+    ciSize = value.size() + index;
+
     for(int i=0; i<value.size(); i++) {
         ciBrickArray[index++] = value.at(i);
     }
-    ciSize = value.size() + index;
 }
 
 
@@ -104,11 +105,7 @@ QString CI::getFullPath(const QChar delim) const
 
     for (int i=0; i<ciSize; i++) {
 
-        out += ((CI_Brick) ciBrickArray[i]).contentToPath();
-
-        if(i < (ciSize-1)) {
-            out += delim;
-        }
+        out += ((CI_Brick) ciBrickArray[i]).contentToPath() + delim;
     }
     return out;
 }
@@ -119,12 +116,16 @@ QString CI::getRoutingPath(const QChar delim) const
 
     for (int i=0; i<ciSize; i++) {
 
-        out += ((CI_Brick) ciBrickArray[i]).contextToRoutePath();
-
-        if(i < (ciSize-1)) {
-            out += delim;
-        }
+        qDebug() << ((CI_Brick) ciBrickArray[i]).getContent();
+        qDebug() << ((CI_Brick) ciBrickArray[i]).getMask();
+        out += ((CI_Brick) ciBrickArray[i]).contextToRoutePath() + delim;
+        qDebug() << out;
     }
+
+    if ( out == "/" ) {
+        return "";
+    }
+
     return out;
 }
 
