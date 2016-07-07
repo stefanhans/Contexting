@@ -49,15 +49,16 @@ public:
     void setCiBricks(const QVector<CI_Brick> &value, quint8 index=0);
 
     /*
+     * Context functions
+     */
+    QString getContextContent() const;
+    QString getContextRoute() const;
+
+    /*
      * Path functions
      */
     QString getFullPath(const QChar delim='/') const;
     QString getRoutingPath(const QChar delim='/') const;
-
-    /*
-     * Context functions
-     */
-    QString getContextRoute();
 
 private:
 
@@ -65,6 +66,8 @@ private:
     CI_Brick rootCIC;
     quint8 ciSize;
     CI_Brick ciBrickArray[255];
+
+    QString hexToPath(const QString hex, QChar delim) const;
 };
 
 #endif // CI_H

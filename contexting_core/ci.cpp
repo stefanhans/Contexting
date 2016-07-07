@@ -94,43 +94,24 @@ void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 }
 
 
-/*
- * Path functions
- */
-QString CI::getFullPath(const QChar delim) const
-{
-    QString out;
 
-    qDebug() << "ciSize: " << ciSize;
-
-    for (int i=0; i<ciSize; i++) {
-
-        out += ((CI_Brick) ciBrickArray[i]).contentToPath() + delim;
-    }
-    return out;
-}
-
-QString CI::getRoutingPath(const QChar delim) const
-{
-    QString out;
-
-    for (int i=0; i<ciSize; i++) {
-
-        qDebug() << ((CI_Brick) ciBrickArray[i]).getContent();
-        qDebug() << ((CI_Brick) ciBrickArray[i]).getMask();
-        if ( ! ((CI_Brick) ciBrickArray[i]).contextToRoutePath().isEmpty()) {
-            out += ((CI_Brick) ciBrickArray[i]).contextToRoutePath() + delim;
-            qDebug() << out;
-        }
-    }
-
-    return out;
-}
 
 /*
  * Context functions
  */
-QString CI::getContextRoute()
+
+QString CI::getContextContent() const
+{
+    QString out;
+
+    for (int i=0; i<ciSize; i++) {
+
+        out += ((CI_Brick) ciBrickArray[i]).contentToHex();
+    }
+    return out;
+}
+
+QString CI::getContextRoute() const
 {
 
     QString out;
@@ -138,6 +119,34 @@ QString CI::getContextRoute()
     for (int i=0; i<ciSize; i++) {
 
         out += ((CI_Brick) ciBrickArray[i]).contextToRoute();
+    }
+    return out;
+}
+
+
+/*
+ * Path functions
+ */
+QString CI::getFullPath(const QChar delim) const
+{
+    return hexToPath(getContextContent(), delim);
+
+}
+
+QString CI::getRoutingPath(const QChar delim) const
+{
+    return hexToPath(getContextRoute(), delim);
+}
+
+/*
+ * Private String Functions
+ */
+QString CI::hexToPath(const QString hex, QChar delim) const
+{
+    QString out;
+
+    for (int i=0; i<hex.size(); i++) {
+        out += hex.at(i) + QString(delim);
     }
     return out;
 }
