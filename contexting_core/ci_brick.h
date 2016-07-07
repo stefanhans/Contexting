@@ -36,10 +36,7 @@ public:
     QString contentToBinary() const;
     QString maskToBinary() const;
 
-    QString contentToPath(const QChar delim='/') const;
-
     QString contextToRoute() const;
-    QString contextToRoutePath(const QChar delim='/') const;
 
 private:
 

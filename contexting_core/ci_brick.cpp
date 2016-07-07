@@ -1,7 +1,5 @@
 #include "ci_brick.h"
 
-#include <QDebug>
-
 bool CI_Brick::operator==(const CI_Brick &ci_brick)
 {
     return content == ci_brick.content && mask == ci_brick.mask;
@@ -50,9 +48,7 @@ bool CI_Brick::contextMatch(quint8 otherContent, quint8 otherMask) const
     if (not_request_relevant != 0) {
         return false;
     }
-
     return true;
-
 }
 
 bool CI_Brick::contentMatch(CI_Brick otherBrick) const
@@ -97,12 +93,6 @@ QString CI_Brick::maskToBinary() const
 }
 
 
-QString CI_Brick::contentToPath(const QChar delim) const
-{
-    return QString("%1%2%3").arg(contentToHex().at(0)).arg(delim).arg(contentToHex().at(1));
-}
-
-
 QString CI_Brick::contextToRoute() const
 {
     QString out = "";
@@ -114,20 +104,5 @@ QString CI_Brick::contextToRoute() const
             out += contentToHex().at(1);
         }
     }
-
     return out;
-}
-
-
-QString CI_Brick::contextToRoutePath(const QChar delim) const
-{
-    if ( mask == 0) {
-        return QString("%1%2%3").arg(contentToHex().at(0)).arg(delim).arg(contentToHex().at(1));
-    }
-
-    if(maskToHex().at(0) == '0') {
-        return QString("%1").arg(contentToHex().at(0));
-    }
-
-    return QString("");
 }

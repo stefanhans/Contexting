@@ -183,11 +183,6 @@ void Ci_brickTest::testStringFunctions()
             QVERIFY(((quint8) ci_brick.maskToBinary().toUInt(&ok, 2)) == j);
 
 
-            //QString contentToPath() const;
-
-            QVERIFY(ci_brick.contentToPath() == ci_brick.contentToHex().at(0) + '/' + ci_brick.contentToHex().at(1));
-
-
             //QString contextToRoute() const;
 
             QString route;
@@ -199,19 +194,6 @@ void Ci_brickTest::testStringFunctions()
                 }
             }
             QVERIFY(ci_brick.contextToRoute() == route);
-
-
-            //QString contextToRoutePath() const;
-
-            route.clear();
-            if(ci_brick.maskToHex().at(0) == '0') {
-                route += ci_brick.contentToHex().at(0);
-
-                if(ci_brick.maskToHex().at(1) == '0') {
-                    route += '/' + ci_brick.contentToHex().at(1);
-                }
-            }
-            QVERIFY(ci_brick.contextToRoutePath() == route);
         }
     }
 }
@@ -242,12 +224,6 @@ void Ci_brickTest::testRandomStringFunctions()
         QVERIFY(((quint8) ci_brick.contentToBinary().toUInt(&ok, 2)) == randContent);
         QVERIFY(((quint8) ci_brick.maskToBinary().toUInt(&ok, 2)) == randMask);
 
-
-        //QString contentToPath() const;
-
-        QVERIFY(ci_brick.contentToPath() == ci_brick.contentToHex().at(0) + '/' + ci_brick.contentToHex().at(1));
-
-
         //QString contextToRoute() const;
 
         QString route;
@@ -259,20 +235,6 @@ void Ci_brickTest::testRandomStringFunctions()
             }
         }
         QVERIFY(ci_brick.contextToRoute() == route);
-
-
-        //QString contextToRoutePath() const;
-
-        route.clear();
-        if(ci_brick.maskToHex().at(0) == '0') {
-            route += ci_brick.contentToHex().at(0);
-
-            if(ci_brick.maskToHex().at(1) == '0') {
-                route += '/' + ci_brick.contentToHex().at(1);
-            }
-        }
-        QVERIFY(ci_brick.contextToRoutePath() == route);
-
     }
 }
 

@@ -43,16 +43,18 @@ public:
 
 
     /*
-     * ciBricks complete
+     * ciBricks
      */
     const QVector<CI_Brick> getCiBricks(quint8 index=0, quint8 length=0) const;
     void setCiBricks(const QVector<CI_Brick> &value, quint8 index=0);
+
 
     /*
      * Context functions
      */
     QString getContextContent() const;
     QString getContextRoute() const;
+
 
     /*
      * Path functions
