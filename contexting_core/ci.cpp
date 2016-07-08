@@ -94,12 +94,9 @@ void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 }
 
 
-
-
 /*
  * Context functions
  */
-
 QString CI::getContextContent() const
 {
     QString out;
@@ -137,6 +134,7 @@ QString CI::getRoutingPath(const QChar delim) const
 {
     return hexToPath(getContextRoute(), delim);
 }
+
 
 /*
  * Private String Functions

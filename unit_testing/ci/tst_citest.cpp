@@ -51,6 +51,7 @@ private:
     quint8 randByte();
     quint8 randByteUnique();
 
+    QVector<quint8> testMasks;
     QVector<quint8> testInts;
 
     bool ciBricksAreEqual(const QVector<CI_Brick> &value_1, const QVector<CI_Brick> &value_2);
@@ -77,6 +78,10 @@ void CiTest::initTestCase()
 
     ci_bricks_full.fill(ci_brick_all_0, 255);
 
+    testMasks.append(0);
+    testMasks.append(1);
+    testMasks.append(128);
+
     testInts.append(0);
     testInts.append(1);
     testInts.append(2);
@@ -97,6 +102,8 @@ void CiTest::initTestCase()
 
 void CiTest::testGetterSetter()
 {
+    QSKIP("OKAY");
+
     // CiType
     qDebug() << "CiType";
     for (int i = 0; i<=255; i++) {
@@ -145,6 +152,8 @@ void CiTest::testGetterSetter()
 
 void CiTest::testRandomGetterSetter()
 {
+    QSKIP("OKAY");
+
     // CiType
     qDebug() << "CiType";
     for (int i=0; i<1000; i++) {
@@ -200,6 +209,8 @@ void CiTest::testRandomGetterSetter()
 
 void CiTest::testCiBricks()
 {
+    QSKIP("NOT YET OKAY");
+
     // CiBrick set/get all
     qDebug() << "CiBrick set/get all";
 
@@ -251,6 +262,8 @@ void CiTest::testCiBricks()
 
 void CiTest::testRandomCiBricks()
 {
+    QSKIP("NOT YET OKAY");
+
     // CiBrick set/get all
     qDebug() << "CiBrick set/get all";
 
@@ -269,104 +282,114 @@ void CiTest::testRandomCiBricks()
 
 void CiTest::testContextFunctions()
 {
-    QString path, route;
+    QString context, path, route;
 
-//    QString getContextContent() const;
+    /*
+     * QString getContextContent() const
+     */
     qDebug() << "QString getContextContent() const;";
 
     foreach(quint8 length, testInts) {
-        qDebug() << "length: " << length;
 
-        path.clear();
-        route.clear();
+        context.clear();
         ci_bricks.clear();
 
         for (int i=0; i<length; i++) {
             rand = randByteUnique();
-            qDebug() << "rand: " << QString("%1: %2 -> %3").arg(length).arg(rand).arg(rand, 2, 16);
+
+            context += QString("%1").arg(rand, 2, 16, QLatin1Char('0'));
+
             ci_brick.setContent(rand);
-
-            if (i == length/2) {
-                qDebug() << length << " " << length/2;
-                qDebug() << QString("%1: %3").arg(rand).arg(rand, 2, 16);
-                ci_brick.setMask(mask);
-
-                route = path;
-            }
-
-            path += QString("%1").arg(rand, 2, 16, QLatin1Char('0'));
             ci_bricks.append(ci_brick);
 
         }
         ci.setCiBricks(ci_bricks);
-        qDebug() << "path: " << path;
-        qDebug() << "ci.getRoutingPath(): " << ci.getRoutingPath();
-        QVERIFY(path == ci.getContextRoute());
 
-        QString routePath = ci.getContextRoute();
-        QString out;
+        //        qDebug() << "context: " << context;
+        //        qDebug() << "ci.getContextContent(): " << ci.getContextContent();
 
-        for (int i=0; i<routePath.size(); i++) {
-            qDebug() << routePath.at(i) + '/';
-            out += routePath.at(i) + '/';
-        }
-        qDebug() << routePath;
-        qDebug() << out;
+        QVERIFY(context == ci.getContextContent());
     }
 
+    /*
+     * QString getContextRoute() const
+     */
 
-//    QString getContextRoute() const;
     qDebug() << "QString getContextRoute() const;";
 
-    int mask = 0;
-    qDebug() << "-------------------------\nmask: " << mask;
+    foreach(quint8 mask, testMasks) {
 
-    foreach(quint8 length, testInts) {
-        qDebug() << "length: " << length;
+        qDebug() << "\nmask: " << mask;
 
-        path.clear();
-        route.clear();
-        ci_bricks.clear();
+        foreach(quint8 length, testInts) {
+            qDebug() << "length: " << length;
 
-        for (int i=0; i<length; i++) {
-            rand = randByteUnique();
-            qDebug() << "rand: " << QString("%1: %2 -> %3").arg(length).arg(rand).arg(rand, 2, 16);
-            ci_brick.setContent(rand);
+            path.clear();
+            route.clear();
+            ci_bricks.clear();
 
-            if (i == length/2) {
-                qDebug() << length << " " << length/2;
-                qDebug() << QString("%1: %3").arg(rand).arg(rand, 2, 16);
-                ci_brick.setMask(mask);
+            for (int i=0; i<length; i++) {
+                rand = randByteUnique();
 
+                qDebug() << "------------------------";
+                qDebug() << "rand: " << QString("%1: %2 -> %3").arg(length).arg(rand).arg(rand, 2, 16);
+                ci_brick.setContent(rand);
+
+                if(mask == 0 || mask == 1) {
+
+                    path += QString("%1").arg(rand, 2, 16, QLatin1Char('0')).at(0);
+                    path += "/";
+                }
+
+                if(mask == 0) {
+
+                    path += QString("%1").arg(rand, 2, 16, QLatin1Char('0')).at(1);
+                    path += "/";
+                }
+
+                if (i == length/2) {
+                    qDebug() << length << " " << length/2;
+                    qDebug() << QString("%1: %3").arg(rand).arg(rand, 2, 16);
+
+                    qDebug() << "mask: " << mask;
+                    ci_brick.setMask(mask);
+
+                    if(mask != 0) {
+                        route = path;
+                    }
+                }
+
+                if(mask == 128) {
+
+                    path += QString("%1").arg(rand, 2, 16, QLatin1Char('0')).at(0);
+                    path += "/";
+                }
+
+                if(mask == 1 || mask == 128) {
+
+                    path += QString("%1").arg(rand, 2, 16, QLatin1Char('0')).at(1);
+                    path += "/";
+                }
+                ci_bricks.append(ci_brick);
+            }
+            ci.setCiBricks(ci_bricks);
+
+            if(mask == 0) {
                 route = path;
             }
+            qDebug() << "route: " << route;
+            qDebug() << "ci.getRoutingPath(): " << ci.getRoutingPath();
 
-            path += QString("%1").arg(rand, 2, 16, QLatin1Char('0'));
-            ci_bricks.append(ci_brick);
-
+            QVERIFY(route == ci.getRoutingPath());
         }
-        ci.setCiBricks(ci_bricks);
-        qDebug() << "path: " << path;
-        qDebug() << "ci.getRoutingPath(): " << ci.getRoutingPath();
-        QVERIFY(path == ci.getContextRoute());
-
-        QString routePath = ci.getContextRoute();
-        QString out;
-
-        for (int i=0; i<routePath.size(); i++) {
-            qDebug() << routePath.at(i) + '/';
-            out += routePath.at(i) + '/';
-        }
-        qDebug() << routePath;
-        qDebug() << out;
     }
-
-
 }
 
 
 void CiTest::testPathFunctions()
 {
+
+    QSKIP("NOT YET OKAY");
 
 //    QString getFullPath(const QChar delim='/') const;
     qDebug() << "QString getFullPath(const QChar delim='/') const";
