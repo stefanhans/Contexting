@@ -78,7 +78,7 @@ const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
         }
     }
 
-    for (int i = index; i < length; i++) {
+    for (int i = index; i < index+length; i++) {
         out.append(ciBrickArray[i]);
     }
     return out;
@@ -116,6 +116,11 @@ QString CI::getContextRoute() const
     for (int i=0; i<ciSize; i++) {
 
         out += ((CI_Brick) ciBrickArray[i]).contextToRoute();
+
+        if(((CI_Brick) ciBrickArray[i]).getMask() != 0) {
+
+            return out;
+        }
     }
     return out;
 }

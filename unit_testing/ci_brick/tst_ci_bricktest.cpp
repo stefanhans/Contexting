@@ -46,12 +46,9 @@ void Ci_brickTest::initTestCase()
 
 
 void Ci_brickTest::testGetterSetter()
-{    
-    //quint8 getContent() const;
-    //void setContent(const quint8 &value);
-
-    //quint8 getMask() const;
-    //void setMask(const quint8 &value);
+{
+    // content/mask
+    qDebug() << "content/mask";
 
     for (int i = 0; i<=255; i++) {
         content=i;
@@ -69,8 +66,11 @@ void Ci_brickTest::testGetterSetter()
 
 
 void Ci_brickTest::testCopyAndAssignment()
-{   
-    //bool operator==(const CI_Brick &ci_brick);
+{
+    /*
+     * bool operator==(const CI_Brick &ci_brick)
+     */
+    qDebug() << "bool operator==(const CI_Brick &ci_brick)";
 
     ci_brick_2 = ci_brick;
     QVERIFY(ci_brick_2 == ci_brick);
@@ -78,8 +78,12 @@ void Ci_brickTest::testCopyAndAssignment()
 
 
 void Ci_brickTest::testMaskFunctions()
-{    
-    //bool hasEmptyMask() const;
+{
+    /*
+     * bool hasEmptyMask() const
+     */
+    qDebug() << "bool hasEmptyMask() const";
+
 
     ci_brick.setMask(0);
     QVERIFY(ci_brick.hasEmptyMask());
@@ -90,7 +94,10 @@ void Ci_brickTest::testMaskFunctions()
     }
 
 
-    //bool hasFullMask() const;
+    /*
+     * bool hasFullMask() const
+     */
+    qDebug() << "bool hasFullMask() const";
 
     ci_brick.setMask(255);
     QVERIFY(ci_brick.hasFullMask());
@@ -104,7 +111,10 @@ void Ci_brickTest::testMaskFunctions()
 
 void Ci_brickTest::testCompareFunctions()
 {
-    //bool contentMatch(quint8 otherContent) const;
+    /*
+     * bool contentMatch(quint8 otherContent) const
+     */
+    qDebug() << "bool contentMatch(quint8 otherContent) const";
 
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
@@ -112,7 +122,10 @@ void Ci_brickTest::testCompareFunctions()
     }
 
 
-    //bool contextMatch(quint8 otherContent, quint8 otherMask) const;
+    /*
+     * bool contextMatch(quint8 otherContent, quint8 otherMask) const
+     */
+    qDebug() << "bool contextMatch(quint8 otherContent, quint8 otherMask) const";
 
     ci_brick.setContent(0);
     ci_brick.setMask(0);
@@ -126,7 +139,10 @@ void Ci_brickTest::testCompareFunctions()
     QVERIFY2(ci_brick.contextMatch(1, 1), "0,1: ci_brick.contentMatch(1, 1)"); // unequal content, but both masks ignore
 
 
-    //bool contentMatch(CI_Brick otherBrick) const;
+    /*
+     * bool contentMatch(CI_Brick otherBrick) const
+     */
+    qDebug() << "bool contentMatch(CI_Brick otherBrick) const";
 
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
@@ -135,7 +151,10 @@ void Ci_brickTest::testCompareFunctions()
     }
 
 
-    //bool contextMatch(CI_Brick otherBrick) const;
+    /*
+     * bool contextMatch(CI_Brick otherBrick) const
+     */
+    qDebug() << "bool contextMatch(CI_Brick otherBrick) const";
 
     ci_brick.setContent(0);
     ci_brick.setMask(0);
@@ -159,6 +178,12 @@ void Ci_brickTest::testCompareFunctions()
 
 void Ci_brickTest::testStringFunctions()
 {
+    qDebug() << "QString contentToHex() const";
+    qDebug() << "QString maskToHex() const";
+    qDebug() << "QString contentToBinary() const";
+    qDebug() << "QString maskToBinary() const";
+    qDebug() << "QString contextToRoute() const";
+
     for (int i = 0; i<=255; i++) {
         ci_brick.setContent(i);
 
@@ -201,6 +226,12 @@ void Ci_brickTest::testStringFunctions()
 
 void Ci_brickTest::testRandomStringFunctions()
 {
+    qDebug() << "QString contentToHex() const";
+    qDebug() << "QString maskToHex() const";
+    qDebug() << "QString contentToBinary() const";
+    qDebug() << "QString maskToBinary() const";
+    qDebug() << "QString contextToRoute() const";
+
     for (int i=0; i<100; i++) {
 
         randContent = randByteUnique();
