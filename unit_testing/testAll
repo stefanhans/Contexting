@@ -3,6 +3,10 @@ echo ""
 echo ""
 
 echo ""
+./test_ci_head
+echo ""
+
+echo ""
 ./test_ci
 echo ""
 
