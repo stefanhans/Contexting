@@ -13,7 +13,7 @@ public:
 
     CI_Data() :
         appDataType(0),
-        appDataSize(),
+        appDataSize(0),
         appDataArray() {}
 
     /*
