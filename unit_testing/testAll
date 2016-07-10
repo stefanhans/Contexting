@@ -6,4 +6,8 @@ echo ""
 ./test_ci
 echo ""
 
+echo ""
+./test_ci_data
+echo ""
+
 
