@@ -62,6 +62,12 @@ public:
     QString getFullPath(const QChar delim='/') const;
     QString getRoutingPath(const QChar delim='/') const;
 
+    /*
+     * Match functions
+     */
+    bool match(const QVector<CI_Brick> &otherBricks) const;
+
+
 private:
 
     quint8 ciType;

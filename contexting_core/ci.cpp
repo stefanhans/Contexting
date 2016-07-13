@@ -141,6 +141,20 @@ QString CI::getRoutingPath(const QChar delim) const
 }
 
 
+bool CI::match(const QVector<CI_Brick> &otherBricks) const
+{
+    if(ciSize != otherBricks.size()) {
+        return false;
+    }
+    for (int i =0; i<ciSize; i++) {
+        if( ! ciBrickArray[i].contextMatch(otherBricks.at(i))) {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 /*
  * Private String Functions
  */

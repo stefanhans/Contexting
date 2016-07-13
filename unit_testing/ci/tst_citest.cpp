@@ -18,6 +18,7 @@ private Q_SLOTS:
     void testCiBricks();
     void testContextFunctions();
     void testPathFunctions();
+    void testMatchFunctions();
     void cleanupTestCase();
 
 private:
@@ -100,7 +101,7 @@ void CiTest::initTestCase()
 
 void CiTest::testGetterSetter()
 {
-//    QSKIP("OKAY");
+    QSKIP("OKAY");
 
     // CiType
     qDebug() << "CiType";
@@ -150,7 +151,7 @@ void CiTest::testGetterSetter()
 
 void CiTest::testRandomGetterSetter()
 {
-//    QSKIP("OKAY");
+    QSKIP("OKAY");
 
     // CiType
     qDebug() << "CiType";
@@ -206,7 +207,7 @@ void CiTest::testRandomGetterSetter()
 
 void CiTest::testCiBricks()
 {
-//    QSKIP("OKAY");
+    QSKIP("OKAY");
 
     // CiBrick index=0
     qDebug() << "CiBrick index=0";
@@ -218,7 +219,7 @@ void CiTest::testCiBricks()
 
         ci_bricks.fill(ci_brick_all_1, l);
         ci.setCiBricks(ci_bricks);
-        ci.setCiSize(ci_bricks.size());
+//        ci.setCiSize(ci_bricks.size());
 
         QVERIFY(ciBricksAreEqual((QVector<CI_Brick>) ci.getCiBricks(), ci_bricks));
     }
@@ -258,7 +259,7 @@ void CiTest::testCiBricks()
 
 void CiTest::testContextFunctions()
 {
-    //    QSKIP("OKAY");
+        QSKIP("OKAY");
 
     /*
      * QString getContextContent() const
@@ -404,7 +405,7 @@ void CiTest::testContextFunctions()
 
 void CiTest::testPathFunctions()
 {
-//    QSKIP("OKAY");
+    QSKIP("OKAY");
 
     /*
      * QString getFullPath(const QChar delim='/') const
@@ -555,6 +556,44 @@ void CiTest::testPathFunctions()
 }
 
 
+void CiTest::testMatchFunctions()
+{
+//    QSKIP("OKAY");
+
+    /*
+     * bool match(const QVector<CI_Brick> &otherBricks) const
+     */
+    qDebug() << "bool match(const QVector<CI_Brick> &otherBricks) const";
+
+
+    // CiBrick index=0
+    qDebug() << "CiBrick index=0";
+
+    for (int l=0; l<=255; l++) {
+
+        ci_bricks.clear();
+        ci.setCiBricks(ci_bricks_full);
+
+        ci_bricks.fill(ci_brick_all_1, l);
+        ci.setCiBricks(ci_bricks);
+
+        QVERIFY(ci.match(ci_bricks));
+    }
+
+
+    for (int l=0; l<=255; l++) {
+
+        ci_bricks.clear();
+        ci.setCiBricks(ci_bricks_full);
+
+        ci_bricks.fill(ci_brick_all_1, l);
+//        ci_bricks.at(l/2).setContent(11);
+        ci.setCiBricks(ci_bricks);
+
+        QVERIFY(ci.match(ci_bricks));
+    }
+
+}
 
 quint8 CiTest::randByte(int limit)
 {
