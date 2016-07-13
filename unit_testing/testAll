@@ -14,4 +14,7 @@ echo ""
 ./test_ci_data
 echo ""
 
+echo ""
+./test_cip
+echo ""
 
