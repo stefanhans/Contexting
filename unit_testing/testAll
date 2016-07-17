@@ -18,3 +18,7 @@ echo ""
 ./test_cip
 echo ""
 
+echo ""
+./test_packaging
+echo ""
+
