@@ -12,7 +12,7 @@ quint8 CI_Brick::getContent() const
 
 void CI_Brick::setContent(const quint8 &value)
 {
-    content = (quint8) value;
+    content = value;
 }
 
 quint8 CI_Brick::getMask() const
