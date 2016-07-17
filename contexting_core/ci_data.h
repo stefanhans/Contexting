@@ -35,6 +35,7 @@ public:
      */
     const QVector<quint8> getAppData(quint8 index=0, quint8 length=0) const;
     void setAppData(const QVector<quint8> &value, quint8 index=0);
+    void setAppData(const QByteArray &value);
 
 private:
 

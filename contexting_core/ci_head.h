@@ -53,6 +53,7 @@ public:
      * uuid
      */
     QUuid getUuid() const;
+    void setUuid(const QUuid &value);
 
     /*
      * ipAddress
@@ -90,6 +91,7 @@ public:
      */
     const QVector<quint8> getHeadData(quint8 index=0, quint8 length=0) const;
     void setHeadData(const QVector<quint8> &value, quint8 index=0);
+    void setHeadData(const QByteArray &value);
 
 private:
 

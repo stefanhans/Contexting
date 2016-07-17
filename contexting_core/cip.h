@@ -5,7 +5,10 @@
 #include "ci.h"
 #include "ci_data.h"
 
+#include <arpa/inet.h>
+
 #include <QVector>
+#include <QDateTime>
 
 
 class CIP
@@ -65,6 +68,10 @@ public:
     QUuid getUuid() const {
         return ciHead.getUuid();
     }
+//    void setUuid(const QUuid &value)
+//    {
+//        ciHead.setUuid(value);
+//    }
 
     /*
      * ipAddress
@@ -244,6 +251,13 @@ public:
     }
 
 
+    /*
+     * packet functions
+     */
+    void pack();
+    void unpack();
+
+    bool validatePacket();
 
 
 private:
@@ -251,6 +265,8 @@ private:
     CI_Head ciHead;
     CI ci;
     CI_Data ciData;
+
+    QByteArray packet;
 
 };
 #endif // CIP_H

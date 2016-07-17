@@ -93,6 +93,19 @@ void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
     }
 }
 
+void CI::setCiBricks(const QByteArray &value)
+{
+    ciSize = value.size();
+
+    for(int i=0; i<value.size();i++) {
+        quint8 content = value.at(i++);
+        if(i<value.size()) {
+            ciBrickArray[i] = CI_Brick(content, value.at(i));
+//            CICBricks.append(CICBrick(content, value.at(i)));
+        }
+    }
+}
+
 
 /*
  * Context functions

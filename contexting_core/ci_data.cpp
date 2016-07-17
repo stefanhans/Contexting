@@ -57,3 +57,12 @@ void CI_Data::setAppData(const QVector<quint8> &value, quint8 index)
         appDataArray[index++] = value.at(i);
     }
 }
+
+void CI_Data::setAppData(const QByteArray &value)
+{
+    appDataSize = value.size();
+
+    for(int i=0; i<value.size();i++) {
+        appDataArray[i] = value.at(i);
+    }
+}

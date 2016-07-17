@@ -66,6 +66,11 @@ QUuid CI_Head::getUuid() const
     return uuid;
 }
 
+void CI_Head::setUuid(const QUuid &value)
+{
+    uuid = value;
+}
+
 
 /*
  * ipAddress
@@ -162,5 +167,14 @@ void CI_Head::setHeadData(const QVector<quint8> &value, quint8 index)
 
     for(int i=0; i<value.size(); i++) {
         headDataArray[index++] = value.at(i);
+    }
+}
+
+void CI_Head::setHeadData(const QByteArray &value)
+{
+    headDataSize = value.size();
+
+    for(int i=0; i<value.size();i++) {
+        headDataArray[i] = value.at(i);
     }
 }
