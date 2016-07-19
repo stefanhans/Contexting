@@ -21,6 +21,15 @@ public:
         ci(),
         ciData() {}
 
+    CIP(QByteArray &value) :
+        ciHead(),
+        ci(),
+        ciData() {
+
+        setPacket(value);
+        unpack();
+    }
+
 
     /*
      * request
@@ -254,10 +263,8 @@ public:
     /*
      * packet functions
      */
-    void pack();
-    void unpack();
-
-    bool validatePacket();
+    const QByteArray getPacket();
+    void setPacket(QByteArray &value);
 
 
 private:
@@ -267,6 +274,14 @@ private:
     CI_Data ciData;
 
     QByteArray packet;
+
+
+
+    bool validatePacket();
+
+
+    void pack();
+    void unpack();
 
 };
 #endif // CIP_H

@@ -211,6 +211,20 @@ void CIP::unpack() {
 }
 
 
+const QByteArray CIP::getPacket() {
+    qDebug() << "getPacket().size: " << packet.size();
+    if(packet.size() <= 10) {
+        pack();
+    }
+    return packet;
+}
+
+void CIP::setPacket(QByteArray &value) {
+    packet = value;
+}
+
+
+
 /*
  *
  * VALIDATE CIP

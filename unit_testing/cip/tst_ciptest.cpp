@@ -15,6 +15,7 @@ public:
 private Q_SLOTS:
     void initTestCase();
     void testGetterSetter();
+    void testPacketFunctions();
     void cleanupTestCase();
 
 private:
@@ -27,6 +28,8 @@ private:
 
     quint8 randByte(int limit=256);
     quint8 randByteUnique();
+
+    void randCip(CIP &cip);
 
     bool headDataAreEqual(const QVector<quint8> &value_1, const QVector<quint8> &value_2);
 };
@@ -143,6 +146,17 @@ void CipTest::testGetterSetter()
 }
 
 
+void CipTest::testPacketFunctions() {
+
+    QByteArray cipPacket = cip.getPacket();
+    CIP cipFromPacket(cipPacket);
+    randCip(cipFromPacket);
+
+    QByteArray controlPacket = cipFromPacket.getPacket();
+
+    QVERIFY(controlPacket == cipPacket);
+}
+
 void CipTest::cleanupTestCase()
 {
 }
@@ -167,6 +181,22 @@ quint8 CipTest::randByteUnique()
     }
 
     return rand_2;
+}
+
+void CipTest::randCip(CIP &cip)
+{
+    cip.setRequest(randByteUnique());
+    cip.setProfile(randByteUnique());
+    cip.setVersion(randByteUnique());
+    cip.setChannel(randByteUnique());
+    cip.setIpAddress(QHostAddress(QString("%1.%2.%3.%4").arg(randByteUnique()).arg(randByteUnique()).arg(randByteUnique()).arg(randByteUnique())));
+    cip.setIpPort(randByteUnique()*randByteUnique());
+    cip.setTime(QDateTime::currentDateTime());
+    cip.setHeadType(randByteUnique());
+    cip.setHeadSize(randByteUnique());
+    for(int i=0; i <cip.getHeadSize(); i++) {
+        cip.setHeadData(QVector<quint8>(randByteUnique()), i);
+    }
 }
 
 bool CipTest::headDataAreEqual(const QVector<quint8> &value_1, const QVector<quint8> &value_2) {
