@@ -148,8 +148,6 @@ void CipTest::testGetterSetter()
 
 void CipTest::testPacketFunctions() {
 
-<<<<<<< HEAD
-
     QByteArray oneCipPacket, controlPacket;
 
     QVector<CIP> randomCIPs;
@@ -174,20 +172,6 @@ void CipTest::testPacketFunctions() {
         qDebug() << "oneCipPacket.size(): " << oneCipPacket.size();
 
         QVERIFY(controlPacket == oneCipPacket);
-=======
-    QByteArray cipPacket;
-    QByteArray controlPacket;
-
-    for (int i = 0; i<=2; i++) {
-        cipPacket = cip.getPacket();
-        CIP cipFromPacket(cipPacket);
-        randCip(cipFromPacket);
-
-        controlPacket = cipFromPacket.getPacket();
-
-        QVERIFY(controlPacket == cipPacket);
->>>>>>> b0dcb99784c4723bc389916cbfa2eb6fab2eb540
-
     }
 }
 
@@ -231,8 +215,7 @@ void CipTest::randCip(CIP &cip)
     for(int i=0; i <cip.getHeadSize(); i++) {
         cip.setHeadData(QVector<quint8>(randByteUnique()), i);
     }
-<<<<<<< HEAD
-=======
+
     cip.setCiType(randByteUnique());
     cip.setCiSize(randByteUnique());
     QVector<CI_Brick> ciBricks;
@@ -245,8 +228,6 @@ void CipTest::randCip(CIP &cip)
     for(int i=0; i <cip.getAppSize(); i++) {
         cip.setAppData(QVector<quint8>(randByteUnique()), i);
     }
->>>>>>> b0dcb99784c4723bc389916cbfa2eb6fab2eb540
-
 }
 
 bool CipTest::headDataAreEqual(const QVector<quint8> &value_1, const QVector<quint8> &value_2) {
