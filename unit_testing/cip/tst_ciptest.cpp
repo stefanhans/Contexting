@@ -219,9 +219,10 @@ void CipTest::randCip(CIP &cip)
     cip.setCiType(randByteUnique());
     cip.setCiSize(randByteUnique());
     QVector<CI_Brick> ciBricks;
-    for(int i=0; i <cip.getCiSize(); i++) {
-        ciBricks.append(CI_Brick(randByteUnique(), randByteUnique()));
-    }
+//    for(int i=0; i <cip.getCiSize(); i++) {
+//        ciBricks.append(CI_Brick(randByteUnique(), randByteUnique()));
+//    }
+
     cip.setCiBricks(ciBricks);
     cip.setAppType(randByteUnique());
     cip.setAppSize(randByteUnique());
