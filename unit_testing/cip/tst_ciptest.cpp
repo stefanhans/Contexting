@@ -244,6 +244,7 @@ bool CipTest::headDataAreEqual(const QVector<quint8> &value_1, const QVector<qui
             return false;
         }
     }
+    //
     return true;
 }
 

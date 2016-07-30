@@ -208,7 +208,7 @@ void CIP::unpack() {
     tmpArray = packet.mid(b, size);
     b += size;
     ciData.setAppData(tmpArray);
-}
+} //
 
 
 const QByteArray CIP::getPacket() {
