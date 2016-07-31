@@ -19,19 +19,21 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
-    quint8 headDataType;
-    quint8 headDataSize;
-
-    QVector<quint8> headData;
 
     CIP cip;
+
+    QVector<quint8> data;
+
+    CI_Brick ci_brick;
+    QVector<CI_Brick> ciBricks;
 
     quint8 randByte(int limit=256);
     quint8 randByteUnique();
 
     void randCip(CIP &cip);
 
-    bool headDataAreEqual(const QVector<quint8> &value_1, const QVector<quint8> &value_2);
+bool dataAreEqual(const QVector<quint8> &value_1, const QVector<quint8> &value_2);
+bool ciBricksAreEqual(const QVector<CI_Brick> &value_1, const QVector<CI_Brick> &value_2);
 };
 
 CipTest::CipTest()
@@ -40,7 +42,7 @@ CipTest::CipTest()
 
 void CipTest::initTestCase()
 {
-    headData.fill(0, 255);
+    data.fill(0, 255);
 }
 
 void CipTest::testGetterSetter()
@@ -135,18 +137,140 @@ void CipTest::testGetterSetter()
     qDebug() << "headData";
     for (int i = 0; i<=255; i++) {
 
-        headData.clear();
-        headData.fill(randByteUnique(), i);
+        data.clear();
+        data.fill(randByteUnique(), i);
 
-        cip.setHeadData(headData);
+        cip.setHeadData(data);
 
-        QVERIFY(cip.getHeadData() == headData);
-        QVERIFY(headDataAreEqual(cip.getHeadData(), headData));
+        QVERIFY(cip.getHeadData() == data);
+        QVERIFY(dataAreEqual(cip.getHeadData(), data));
+    }
+
+
+    // appType
+    qDebug() << "appType";
+    for (int i = 0; i<=255; i++) {
+
+        cip.setAppType((quint8) i);
+        QVERIFY(cip.getAppType() == i);
+    }
+
+    // appSize
+    qDebug() << "appSize";
+    for (int i = 0; i<=255; i++) {
+
+        cip.setAppSize(i);
+        QVERIFY(cip.getAppSize() == i);
+    }
+
+
+
+
+
+
+
+    // ciType
+    qDebug() << "ciType";
+    for (int i = 0; i<=255; i++) {
+
+        cip.setCiType(i);
+        QVERIFY(cip.getCiType() == i);
+    }
+
+    // rootCIC
+    qDebug() << "rootCIC";
+    for (int i=0; i<=255; i++) {
+        ci_brick.setContent(i);
+
+        for (int j = 0; j<=255; j++) {
+            ci_brick.setMask(j);
+
+            cip.setRootCIC(ci_brick);
+            QVERIFY(cip.getRootCIC() == ci_brick);
+        }
+    }
+
+    // RootCicContent
+    for (int i=0; i<=255; i++) {
+
+        cip.setRootCicContent(i);
+        QVERIFY(cip.getRootCicContent() == i);
+    }
+
+    // RootCicMask
+    for (int i=0; i<=255; i++) {
+
+        cip.setRootCicMask(i);
+        QVERIFY(cip.getRootCicMask() == i);
+    }
+
+    // ciBricks
+    ciBricks.clear();
+
+    for (int i=0; i<=255; i++) {
+        ciBricks.append(CI_Brick(randByteUnique(), randByteUnique()));
+    }
+
+    cip.setCiBricks(ciBricks);
+    QVERIFY(ciBricksAreEqual(cip.getCiBricks(), ciBricks));
+
+
+//    const QVector<CI_Brick> getCiBricks(quint8 index=0, quint8 length=0) const {
+//        return ci.getCiBricks(index, length);
+//    }
+//    void setCiBricks(const QVector<CI_Brick> &value, quint8 index=0) {
+//        ci.setCiBricks(value, index);
+//    }
+
+
+
+    // CiSize
+    qDebug() << "CiSize";
+    for (int i = 0; i<=255; i++) {
+
+        cip.setCiSize(i);
+        QVERIFY(cip.getCiSize() == i);
+    }
+
+
+
+
+
+
+    // appType
+    qDebug() << "appType";
+    for (int i = 0; i<=255; i++) {
+
+        cip.setAppType((quint8) i);
+        QVERIFY(cip.getAppType() == i);
+    }
+
+    // appSize
+    qDebug() << "appSize";
+    for (int i = 0; i<=255; i++) {
+
+        cip.setAppSize(i);
+        QVERIFY(cip.getAppSize() == i);
+    }
+
+    // appData
+    qDebug() << "appData";
+    for (int i = 0; i<=255; i++) {
+
+        data.clear();
+        data.fill(randByteUnique(), i);
+
+        cip.setAppData(data);
+
+        QVERIFY(cip.getAppData() == data);
+        QVERIFY(dataAreEqual(cip.getAppData(), data));
     }
 }
 
 
-void CipTest::testPacketFunctions() {
+void CipTest::testPacketFunctions()
+{
+    QSKIP("OK");
 
     QByteArray oneCipPacket, controlPacket;
 
@@ -231,7 +355,7 @@ void CipTest::randCip(CIP &cip)
     }
 }
 
-bool CipTest::headDataAreEqual(const QVector<quint8> &value_1, const QVector<quint8> &value_2) {
+bool CipTest::dataAreEqual(const QVector<quint8> &value_1, const QVector<quint8> &value_2) {
 
     if (value_1.size() != value_2.size()) {
         qDebug() << "headDataAreEqual size: " << value_1.size() << " != " << value_2.size();
@@ -244,7 +368,23 @@ bool CipTest::headDataAreEqual(const QVector<quint8> &value_1, const QVector<qui
             return false;
         }
     }
-    //
+    return true;
+}
+
+
+bool CipTest::ciBricksAreEqual(const QVector<CI_Brick> &value_1, const QVector<CI_Brick> &value_2) {
+
+    if (value_1.size() != value_2.size()) {
+        qDebug() << "ciBricksAreEqual size: " << value_1.size() << " != " << value_2.size();
+        return false;
+    }
+
+    for (int i=0; i<value_1.size(); i++) {
+        if ( ! (((CI_Brick)value_1.at(i)) == ((CI_Brick)value_2.at(i)))) {
+            qDebug() << "ciBricksAreEqual at(" << i << "): " << ((CI_Brick)value_1.at(i)).getContent() << " != " << ((CI_Brick)value_2.at(i)).getContent();
+            return false;
+        }
+    }
     return true;
 }
 
