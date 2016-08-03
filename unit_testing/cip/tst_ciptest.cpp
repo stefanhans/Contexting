@@ -146,29 +146,6 @@ void CipTest::testGetterSetter()
         QVERIFY(dataAreEqual(cip.getHeadData(), data));
     }
 
-
-    // appType
-    qDebug() << "appType";
-    for (int i = 0; i<=255; i++) {
-
-        cip.setAppType((quint8) i);
-        QVERIFY(cip.getAppType() == i);
-    }
-
-    // appSize
-    qDebug() << "appSize";
-    for (int i = 0; i<=255; i++) {
-
-        cip.setAppSize(i);
-        QVERIFY(cip.getAppSize() == i);
-    }
-
-
-
-
-
-
-
     // ciType
     qDebug() << "ciType";
     for (int i = 0; i<=255; i++) {
@@ -205,14 +182,34 @@ void CipTest::testGetterSetter()
     }
 
     // ciBricks
-    ciBricks.clear();
+    qDebug() << "ciBricks";
 
-    for (int i=0; i<=255; i++) {
+    ciBricks.clear();
+    for (int i=0; i<255; i++) {
         ciBricks.append(CI_Brick(randByteUnique(), randByteUnique()));
+    }
+    cip.setCiBricks(ciBricks);
+    QVERIFY(ciBricksAreEqual(cip.getCiBricks(), ciBricks));
+
+
+
+    quint8 testIndex = 100;
+    quint8 testLength = 100;
+
+    QVector<CI_Brick> partBricks;
+    partBricks.fill(CI_Brick(0, 0), testLength);
+
+
+    for (int i=0; i<255; i++) {
+        if(i >= testIndex && i <= testIndex + testLength) {
+          ciBricks[i] =  CI_Brick(0, 0);
+        }
     }
 
     cip.setCiBricks(ciBricks);
-    QVERIFY(ciBricksAreEqual(cip.getCiBricks(), ciBricks));
+    QVERIFY(ciBricksAreEqual(cip.getCiBricks(testIndex, testLength), partBricks));
+
+
 
 
 //    const QVector<CI_Brick> getCiBricks(quint8 index=0, quint8 length=0) const {

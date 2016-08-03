@@ -86,7 +86,15 @@ const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
 
 void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 {
-    ciSize = value.size() + index;
+
+    int size = value.size() + index;
+
+    if(size > 255) {
+       ciSize = 255;
+    }
+    else {
+        ciSize = size;
+    }
 
     for(int i=0; i<value.size(); i++) {
         ciBrickArray[index++] = value.at(i);
