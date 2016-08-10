@@ -3,7 +3,7 @@ Final reference implementation of core library in Qt based on experiences from [
 
   [b61004fc]: https://github.com/stefanhans/ContextRouting/ "ContextRouting"
 
-Directories of contexting:  
+Directories:  
 
 - contexting_core (core library modules)
 - unit_testing (test units for library modules)
@@ -14,7 +14,7 @@ Next generation of prototypes in Qt headed to usable applications, e.g.
 ### Location-based Social Network Application
 Simple chat contexting location (GPS) and topic (ASCII string)
 
-Directories of prototypes:  
+Directories:  
 
 - lab (free laboratory for prototypes)
 - chat (prototype of location-based social network application)
