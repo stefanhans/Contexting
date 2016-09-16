@@ -76,6 +76,7 @@ const QVector<CI_Brick> CI::getCiBricks(quint8 index, quint8 length) const
         for (int i = index; i < ciSize-index; i++) {
             out.append(ciBrickArray[i]);
         }
+        return out;
     }
 
     for (int i = index; i < index+length; i++) {
@@ -95,14 +96,10 @@ void CI::setCiBricks(const QVector<CI_Brick> &value, quint8 index)
 
 void CI::setCiBricks(const QByteArray &value)
 {
-    ciSize = value.size();
+    ciSize = value.size()/2;
 
-    for(int i=0; i<value.size();i++) {
-        quint8 content = value.at(i++);
-        if(i<value.size()) {
-            ciBrickArray[i] = CI_Brick(content, value.at(i));
-//            CICBricks.append(CICBrick(content, value.at(i)));
-        }
+    for(int i=0; i<ciSize; i++) {
+        ciBrickArray[i] = CI_Brick(value.at(i*2), value.at(i*2+1));
     }
 }
 
