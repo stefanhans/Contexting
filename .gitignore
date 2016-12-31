@@ -4,6 +4,5 @@
 *~
 
 *.pro.user
-*.pro
 
 build-*/
